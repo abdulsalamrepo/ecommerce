@@ -25,8 +25,6 @@ class CategoryVerifyRequest extends FormRequest
     {
         return [
             'Name' => 'required|unique:categories|max:50',
-            'Type' => 'required'
-            
         ];
     }
 }

@@ -25,9 +25,15 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Category Type</label>
+                            <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Category Parent</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="Type" id="Type" placeholder="Enter Category Type">
+                                <select name="parent_category" class="form-control" style="padding-left: 45%;border-radius: 10px;font-size: 15px;">
+                                    <option value="">None</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{$category->id}}" >{{$category->name}}</option>
+                                    @endforeach
+                                </select>
+                                {{-- <input type="text" class="form-control" name="Type" id="Type" placeholder="Enter Category Type"> --}}
                             </div>
                         </div>
                         <button type="submit" class="btn btn-success mr-2">Submit</button>
@@ -76,7 +82,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($catlist as $cat)
+                                {{-- @foreach($catlist as $cat)
                                 <tr>
                                     <td>
                                         {{$cat->name}}
@@ -97,7 +103,29 @@
                                         <a href="{{route('admin.categories.delete', ['id' => $cat->id])}}" onclick="delete()" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
-                                @endforeach
+                                @endforeach --}}
+@foreach($catlist as $cat)
+<tr>
+    <td>
+        {{$cat->name}}
+    </td>
+    <td>
+        {{$cat->type}}
+    </td>
+    <td>
+        {{$cat->created_at}}
+    </td>
+    <td>
+        {{$cat->updated_at}}
+    </td>
+    <td>
+        <a href="{{route('admin.categories.edit', ['id' => $cat->id])}}" class="btn btn-warning">Edit</a>
+    </td>
+    <td>
+        <a href="{{route('admin.categories.delete', ['id' => $cat->id])}}" onclick="delete()" class="btn btn-danger">Delete</a>
+    </td>
+</tr>
+@endforeach
                             </tbody>
                         </table>
                     </div>
@@ -110,25 +138,25 @@
 
 <!--JQUERY Validation-->
 <script>
-	
+
 	$(document).ready(function() {
-		
+
 		$("#cat_form").validate({
 			rules: {
 				Name: "required",
 				Type: "required",
-				
-				
-				
+
+
+
 			},
 			messages: {
 				Name: "Category Name is Required",
 				Type: "Category Type is Required",
-                	
+
 			}
 		});
 
-		
+
 	});
 	</script>
 <!--/JQUERY Validation-->

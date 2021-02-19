@@ -1,5 +1,7 @@
 <?php
 
+use App\CategoryAll;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,12 +14,21 @@
 */
 //Dashboard
 //login
+Route::get('hik', function () {
+return view('store2.dashboard');
+});
+
+Route::get('test', function () {
+        $c=CategoryAll::first();
+        return response()->json($c->hasChildren());
+});
+
 Route::get('admin', 'loginController@adminIndex')->name('admin.login');
 Route::post('admin', 'loginController@adminPosted');
 
 Route::group(['middleware' => 'admin'], function(){
 
- 
+
     Route::get("/admin_panel", 'admin_panel\dashboardController@index')->name('admin.dashboard');
 
     Route::get('admin/logout', 'loginController@adminLogout')->name('admin.logout');
@@ -44,7 +55,7 @@ Route::group(['middleware' => 'admin'], function(){
     Route::get('/admin_panel/products/delete/{id}', 'admin_panel\productsController@delete')->name('admin.products.delete');
     Route::post('/admin_panel/products/delete/{id}', 'admin_panel\productsController@destroy');
 
-    //order management 
+    //order management
     Route::get('/admin_panel/management', 'admin_panel\managementController@manage')->name('admin.orderManagement');
     Route::post('/admin_panel/management', 'admin_panel\managementController@update')->name('admin.orderUpdate');
 

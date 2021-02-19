@@ -9,7 +9,17 @@ label.error {
   background-color: #f2dede;
   border-color: #ebccd1;
   padding:1px 20px 1px 20px;
-}</style>
+}
+
+.login
+{
+    border: 2px solid;
+    border-radius: 11px;
+    width: 80%;
+    padding: 40px;
+    margin-left: 60%;
+}
+</style>
 <!-- SECTION -->
 <div class="section">
     <!-- container -->
@@ -20,7 +30,7 @@ label.error {
             {{csrf_field()}}
             <div class="col-md-6" style="float: none;">
                 <!-- Billing Details -->
-                <div class="billing-details">
+                <div class="billing-details login">
                     <div class="section-title">
                         <h3 class="title">User Login</h3>
                     </div>
@@ -32,22 +42,22 @@ label.error {
                     </div>
                         <input type="submit"  name="signin" class="primary-btn order-submit" value="Sign In">
                 </form>
-               
+
                 @if(session('message'))
-                
-                
+
+
                 <tr>
                     <td>
                         <li> {{session('message')}}</li>
                     </td>
                 </tr>
-                
-                
-                
-                
-		         
-                @endif   
-                
+
+
+
+
+
+                @endif
+
                 @if($errors->any())
 
                                     <ul>
@@ -60,7 +70,7 @@ label.error {
                                         @endforeach
                                     </ul>
                                     @endif
-                    
+
                 </div>
                 <!-- /Billing Details -->
             </div>
@@ -72,7 +82,7 @@ label.error {
 </div>
 <!--JQUERY Validation-->
 <script>
-	
+
 	$(document).ready(function() {
 		// validate the comment form when it is submitted
 		//$("#commentForm").validate();
@@ -80,7 +90,7 @@ label.error {
 		// validate signup form on keyup and submit
 		$("#loginForm").validate({
 			rules: {
-				
+
 				email: {
 					required: true,
 					email: true
@@ -91,20 +101,20 @@ label.error {
 				}
 			},
 			messages: {
-				
+
 				email: "Please enter a valid email address",
-                
-                
+
+
 				pass: {
 					required: "Please provide a password",
 					minlength: "Your password must be at least 5 characters long"
 				}
-				
-				
+
+
 			}
 		});
 
-		
+
 	});
 	</script>
 <!--/JQUERY Validation-->

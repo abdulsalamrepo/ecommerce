@@ -28,9 +28,9 @@
 
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="{{asset('css/style2.css')}}" />
-    
+
     <!-- JQuery and Validator Plugins -->
-    
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -52,6 +52,10 @@
                 width: 100%;
             }
         }
+                   .header-search form .input {
+    width: calc(100% - 109px);
+    margin-right: -4px;
+}
         </style>
 
 </head>
@@ -69,14 +73,14 @@
                 </ul>
                 <ul class="header-links pull-right">
                     @if(session()->has('user'))
-                      <li><a style="color:white" href="{{route('user.history')}}">{{session()->get('user')->full_name}} </a></li>  
+                      <li><a style="color:white" href="{{route('user.history')}}">{{session()->get('user')->full_name}} </a></li>
                       <li><a href="{{route('user.logout')}}"><i class="fa fa-user-o"></i> Logout</a></li>
                     @else
                     <li><a href="{{route('user.login')}}"><i class="fa fa-user-o"></i> Login</a></li>
-                    
+
                     <li><a href="{{route('user.signup')}}"><i class="fa fa-user-o"></i> SignUp</a></li>
                     @endif
-                    
+
                 </ul>
             </div>
         </div>
@@ -164,7 +168,7 @@
                         @endforeach
                         <li ><a href="{{route('user.search')}}">Browse All</a></li>
                     @endif
-                    
+
                 </ul>
                 <!-- /NAV -->
             </div>
@@ -190,7 +194,7 @@
                 $counter++;
                 if($counter==4)
                 break;
-               
+
                 @endphp
                 <div class="col-md-4 col-xs-6">
                     <div class="shop">
@@ -217,7 +221,7 @@
     @yield('content')
 
     <!-- /SECTION -->
-    
+
     <div id="newsletter" class="section">
         <!-- container -->
         <div class="container">
@@ -355,8 +359,8 @@
     <script src="{{asset('js/main.js')}}"></script>
     <script src="{{asset('js/lib/jquery.js')}}"></script>
     <script src="{{asset('js/dist/jquery.validate.js')}}"></script>
-    
-    
+
+
 
 </body>
 

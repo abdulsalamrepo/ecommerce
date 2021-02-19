@@ -23,7 +23,28 @@
         td{
             white-space: normal !important;
         }
+        .navbar.default-layout {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(
+150deg
+, #4a4a4a, #0a0a0a, #d21010, #0a0a0a, #4a4a4a);
+    transition: background 0.25s ease;
+    -webkit-transition: background 0.25s ease;
+    -moz-transition: background 0.25s ease;
+    -ms-transition: background 0.25s ease;
+}
+.sidebar {
+    background: linear-gradient(
+120deg
+, #0a0a0a, #d21010, #0a0a0a, #d21010);
+}
+.sidebar .nav:not(.sub-menu) > .nav-item:not(.nav-profile) > .nav-link {
+    color: #fafbfc;
+}
+
     </style>
+    @yield('head')
+
 </head>
 
 <body>
@@ -131,11 +152,9 @@
     <!-- inject:js -->
     <script src="{{asset('js/off-canvas.js')}}"></script>
     <script src="{{asset('js/misc.js')}}"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page-->
-
     <script src="{{asset('js/dashboard.js')}}"></script>
     <script src="{{asset('js/chart.js')}}"></script>
 

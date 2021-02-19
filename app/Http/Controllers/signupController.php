@@ -17,7 +17,7 @@ class signupController extends Controller
 {
     public function userIndex()
     {
-        
+
         if(session()->has('user')){
             return redirect()->route("user.cart");
         }
@@ -25,20 +25,20 @@ class signupController extends Controller
         $res = Product::all();
         $cat = Category::all();
 
-       
-        
+
+
     	return view('store.signup')
         ->with('products', $res)
         ->with("cat", $cat);
     }
-    
+
     public function userPosted(Request $r)
     {
-        
-        
 
-        
-            
+
+
+
+
             $validatedData = $r->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -56,16 +56,14 @@ class signupController extends Controller
             $add->area=$r->address;
             $add->city=$r->city;
             $add->zip=$r->zip;
-
             $add->save();
             $add_id=$add->id;
-
             $u->full_name=$r->name;
             $u->email=$r->email;
             $u->password=$r->pass;
             $u->address_id=$add_id;
             $u->phone=$r->tel;
-            
+
             //dd($u);
 
             $u->save();
@@ -75,14 +73,14 @@ class signupController extends Controller
             $r->session()->put('user',$user);
 
             return redirect()->route('user.home');
-        
-       
+
+
     }
-    
+
     public function emailCheck(Request $r)
     {
        $user = User::where('email',$r->email)
-        
+
         ->first();
 
         if($user==null)
@@ -93,10 +91,10 @@ class signupController extends Controller
         {
             $emailstate = 1;
         }
-        
+
          echo json_encode($emailstate);
     exit;
     }
-    
-    
+
+
 }

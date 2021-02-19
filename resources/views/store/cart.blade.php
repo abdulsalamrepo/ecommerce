@@ -13,10 +13,10 @@ label.error {
 }
 
     .rTable {
-        
+
     display: block;
     width:100%;
-    
+
 }
 .rTableHeading, .rTableBody, .rTableFoot, .rTableRow{
     clear: both;
@@ -26,12 +26,12 @@ label.error {
     font-weight: bold;
 }
 .rTableCell, .rTableHead {
-    
+
     float: left;
     overflow: hidden;
     padding: 3px 1.8%;
     width:20%;
-    
+
 }
 .rTable:after {
     visibility: hidden;
@@ -41,15 +41,22 @@ label.error {
     clear: both;
     height: 0;
 }
-
-</style>             
+.rTableCell, .rTableHead {
+    float: left;
+    overflow: hidden;
+    padding: 3px 1.8%;
+    width: 12%;
+    /* border-radius: 50px; */
+    background: bottom;
+}
+</style>
 
 <!-- SECTION -->
 <div class="section">
     <!-- container -->
     <div class="container">
         <!-- row -->
-        
+
 
             <!-- Order Details -->
             <div class="col-md-5 order-details" style="width: 100%;">
@@ -57,15 +64,15 @@ label.error {
                     <h3 class="title">Your Order</h3>
                 </div>
                 <div id="order_summary" class="order-summary">
-                   
-                   
-                   
+
+
+
                     @if($all != null)
                     <div class="rTable">
                         <div class="rTableRow">
                             <div class="rTableHead"><strong>REMOVE</strong></div>
-                            <div class="rTableHead"><strong>PRODUCT</strong></div>
-                            <div class="rTableHead"><strong>QUANTITY</strong></div>
+                            <div class="rTableHead" style="width: 20%"><strong>PRODUCT</strong></div>
+                            <div class="rTableHead" style="width: 23%"><strong>QUANTITY</strong></div>
                             <div class="rTableHead"><strong>COLOR</strong></div>
                             <div class="rTableHead"><strong>PRICE</strong></div>
 
@@ -74,35 +81,47 @@ label.error {
 					@foreach($prod as $p)
 					@if($c[0]==$p->id)
                         <div  class="rTableRow" id="deleteItem_{{$c[3]}}">
-                         
-                          <div class="rTableCell">  <button type="button" id="delete_item"  value={{$c[3]}} name="delete_item"  class="delete_item">X</button></div>
-							<div class="rTableCell"><img src="uploads/products/{{$p->id}}/{{$p->image_name}}" height="50px" width="50px"> {{$p->name}}</div>
-                            
+
+                          <div class="rTableCell">  <button type="button" id="delete_item"  value={{$c[3]}} name="delete_item"  class="delete_item" style="background: white;
+                            border: 0;
+                            font-size: 25px;
+                            color: red;
+                            font-weight: bold;
+                            padding: 10px;
+                        ">X</button></div>
+							<div class="rTableCell" style="    width: 23%;"><img src="uploads/products/{{$p->id}}/{{$p->image_name}}" height="50px" width="50px" style="width: 20%"> {{$p->name}}</div>
+
                             <!--quantity-->
                                                                 <!--c[1] is pid and c[3] is order serial-->
-                            <div class="rTableCell">
-                           <button type="button" id="sub" value={{$p->id}} data-rel={{$c[3]}} data-rel2={{$p->discount}} class="sub">-</button>   
+                            <div class="rTableCell" style="    width: 23%;">
+                           <button type="button" id="sub" value={{$p->id}} data-rel={{$c[3]}} data-rel2={{$p->discount}} class="sub" style="font-size: 22px;
+                            font-weight: bold;
+                            border: 0;
+                            background-color: white;">-</button>
                         <input type="number"  id="quantity" style="width:15%" name={{$p->id}} value={{$c[1]}} min="1" max="100" readonly/>
-                        <button type="button" id="add" value={{$p->id}} data-rel={{$c[3]}} data-rel2={{$p->discount}}  class="add">+</button></div>
-                            
+                        <button type="button" id="add" value={{$p->id}} data-rel={{$c[3]}} data-rel2={{$p->discount}}  class="add" style="font-size: 22px;
+                            font-weight: bold;
+                            border: 0;
+                            background-color: white;">+</button></div>
+
 <!--                            -->
 							<div class="rTableCell"><div style="height:25px;width:25px;display:inline-block;background-color: {{$c[2]}}"></div></div>
-							
+
 							<div class="rTableCell"><div id="individualPrice_{{$c[3]}}">
                                 @php
                                 $tot =$p->discount* $c[1];
                                 echo $tot;
                                 @endphp
-                                
+
                                 TK</div></div>
-                                
+
 						</div>
-                        
+
 						@break
 					@endif
-					@endforeach 
-					@endforeach 
-                    
+					@endforeach
+					@endforeach
+
                     </div>
                     <div class="order-col">
                         <div>Shiping</div>
@@ -117,7 +136,7 @@ label.error {
                         <h1>Your Cart is Empty</h1>
                     </div>
                     @endif
-                    
+
                 </div>
                 <div class="payment-method">
                     <div class="input-radio">
@@ -141,7 +160,7 @@ label.error {
                     @else
                         <a href="{{route('user.home')}}"><input type="button"  class="primary-btn order-submit" value="Order Now"></a>
                     @endif
-                
+
                 @else
                  @if(!session('user'))
         <div class="row">
@@ -178,24 +197,24 @@ label.error {
                     <div class="form-group">
                         <input class="input" type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password">
                     </div>
-                    
-                        
+
+
                         <input type="submit"  name="signup" class="primary-btn order-submit" value="Sign Up">
-               
+
                     </div>
                 <!-- /Billing Details -->
             </div></form>
-               </div>      
-                
-            @endif  
-                    
-                @endif
-                
+               </div>
 
-                
-           
+            @endif
+
+                @endif
+
+
+
+
             <!-- /Order Details -->
-        
+
         </div>
         <!-- /row -->
     </div>
@@ -204,15 +223,15 @@ label.error {
 <!-- /SECTION -->
 
 <script>
-    
+
    //TO DO: ajax will take place
-    
+
     $('.add').click(function () {
 
     var url="{{route('user.editCart')}}";
-    var product_id= $(this).val(); 
+    var product_id= $(this).val();
     $(this).prev().val(+$(this).prev().val() + 1);
-    var x=$(this).prev().val(); 
+    var x=$(this).prev().val();
     var token=$("input[name=_token]").val();
     var order_serial=this.getAttribute('data-rel');
     var product_price=this.getAttribute('data-rel2');
@@ -230,22 +249,22 @@ label.error {
                 document.getElementById("totalCost").innerHTML = msg[2]+" TK";
             }
             });
-        
-   
+
+
     });
     $('.sub').click(function () {
-        
+
         var url="{{route('user.editCart')}}";
         var product_id= $(this).val();
         var order_serial=this.getAttribute('data-rel');
         var product_price=this.getAttribute('data-rel2');
-        if ($(this).next().val() > 1) 
+        if ($(this).next().val() > 1)
         {
             $(this).next().val(+$(this).next().val() - 1);
             var x=$(this).next().val();
             var token=$("input[name=_token]").val();
-            
-            
+
+
             $.ajax({
             type:'post',
             url:url,
@@ -259,11 +278,11 @@ label.error {
 
             }
             });
-            
-        
+
+
         }
     });
-    
+
     $('.delete_item').click(function () {
         var url="{{route('user.deleteCartItem')}}";
         var serial= $(this).val();   //serial is the forth element of sale coloumn
@@ -282,7 +301,7 @@ label.error {
                         document.getElementById("order_summary").innerHTML = "<div class='order-col'><h1>Your Cart is Empty</h1></div>";
                         document.getElementById("confirm_order").style.visibility = "hidden";
                         }
-                   
+
                     //$("#deleteItem_".$p->id").load(location.href+" #refresh_div","");
                     document.getElementById(id_holder).innerHTML  = "";
                     document.getElementById("totalCost").innerHTML = msg[2];
@@ -291,10 +310,10 @@ label.error {
 
 
     });
-	
-    
+
+
     //validation
-    
+
     $(document).ready(function() {
 		// validate the comment form when it is submitted
 		//$("#commentForm").validate();
@@ -323,9 +342,9 @@ label.error {
 					minlength: 5,
 					equalTo: "#pass"
 				}
-				
-				
-				
+
+
+
 			},
 			messages: {
 				name: "Please enter your Fullname",
@@ -347,17 +366,17 @@ label.error {
 					minlength: "Your password must be at least 5 characters long",
 					equalTo: "Please enter the same password as above"
 				}
-				
-				
+
+
 			}
-            
-            
-        
+
+
+
 		});
 
-		
+
 	});
-   
+
 </script>
 <script>
 function myFunction() {
@@ -365,7 +384,7 @@ function myFunction() {
     var email=$("#email").val();
     var token=$("input[name=_token]").val();
     var url="{{route('user.signup.check_email')}}";
-    
+
 
             $.ajax({
                 type:'post',
@@ -374,12 +393,12 @@ function myFunction() {
                 async: false,
                 data:{email: email, _token: token},
                 success:function(msg){
-                        
-                         
+
+
                         if(msg == "1")
                             {
                                 document.getElementById("for_duplicate-email").innerHTML = "<label class='error'>This Email Address is Already taken</label>";
-                                                    
+
 
                             }
                     else
@@ -389,7 +408,7 @@ function myFunction() {
                         }
                     }
              });
-    
+
 }
 </script>
 @endsection

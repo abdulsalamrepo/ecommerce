@@ -12,7 +12,14 @@ label.error {
   padding:1px 20px 1px 20px;
 }
 
-
+.signup
+{
+    border: 2px solid;
+    border-radius: 11px;
+    width: 50%;
+    padding: 25px;
+    margin-left: 25%;
+}
 </style>
     <!-- SECTION -->
 <div class="section">
@@ -25,16 +32,16 @@ label.error {
             {{csrf_field()}}
             <div class="col-md-12">
                 <!-- Billing Details -->
-                <div class="billing-details">
+                <div class="billing-details signup">
                     <div class="section-title">
                         <h3 class="title">SIGN UP</h3>
                     </div>
-                    
+
                     <div class="form-group ">
                         <input class="input" type="text" name="name" id="name" placeholder="Full Name">
                     </div>
                    {!! $errors->first('name', '<label class="error">:message</label>') !!}
-                    
+
                     <div class="form-group">
                         <input class="input" type="email" name="email" id="email" placeholder="Email" onkeyup="myFunction()">
                     </div>
@@ -67,12 +74,12 @@ label.error {
 
 
                     <br>
-                        
+
                         <input type="submit"  name="signup" class="primary-btn order-submit" value="Sign Up">
                 </form>
-                
-                
-                    
+
+
+
                 </div>
                 <!-- /Billing Details -->
             </div>
@@ -85,12 +92,12 @@ label.error {
 
 <!--JQUERY Validation-->
 <script>
-    
-    
-   
-    
-    
-    
+
+
+
+
+
+
 	$(document).ready(function() {
 		// validate the comment form when it is submitted
 		//$("#commentForm").validate();
@@ -119,9 +126,9 @@ label.error {
 					minlength: 5,
 					equalTo: "#pass"
 				}
-				
-				
-				
+
+
+
 			},
 			messages: {
 				name: "Please enter your Fullname",
@@ -143,15 +150,15 @@ label.error {
 					minlength: "Your password must be at least 5 characters long",
 					equalTo: "Please enter the same password as above"
 				}
-				
-				
+
+
 			}
-            
-            
-        
+
+
+
 		});
 
-		
+
 	});
 	</script>
 <!--/JQUERY Validation-->
@@ -165,7 +172,7 @@ function myFunction() {
     var email=$("#email").val();
     var token=$("input[name=_token]").val();
     var url="{{route('user.signup.check_email')}}";
-    
+
 
             $.ajax({
                 type:'post',
@@ -174,12 +181,12 @@ function myFunction() {
                 async: false,
                 data:{email: email, _token: token},
                 success:function(msg){
-                        
-                         
+
+
                         if(msg == "1")
                             {
                                 document.getElementById("for_duplicate-email").innerHTML = "<label class='error'>This Email Address is Already taken</label>";
-                                                    
+
 
                             }
                     else
@@ -189,7 +196,7 @@ function myFunction() {
                         }
                     }
              });
-    
+
 }
 </script>
 <!--/Duplicate Email Validation-->
