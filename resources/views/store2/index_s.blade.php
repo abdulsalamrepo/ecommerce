@@ -5,28 +5,20 @@
             <div class="fixed-list">
                 <ul class="nav" id="init-scrollspy">
                     <li>
-
                         <a class="nav-link" href="#electronic-01" data-click-scroll="#electronic-01"><i class="fas fa-tv"></i></a></li>
                     <li>
-
                         <a class="nav-link" href="#female-02" data-click-scroll="#female-02"><i class="fas fa-female"></i></a></li>
                     <li>
-
                         <a class="nav-link" href="#male-03" data-click-scroll="#male-03"><i class="fas fa-male"></i></a></li>
                     <li>
-
                         <a class="nav-link"><i class="fas fa-fighter-jet"></i></a></li>
                     <li>
-
                         <a class="nav-link"><i class="fas fa-cookie-bite"></i></a></li>
                     <li>
-
                         <a class="nav-link"><i class="fas fa-futbol"></i></a></li>
                     <li>
-
                         <a class="nav-link"><i class="fas fa-book-open"></i></a></li>
                     <li>
-
                         <a class="nav-link"><i class="fas fa-briefcase-medical"></i></a></li>
                 </ul>
             </div>
@@ -59,17 +51,12 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="slider-content slider-content--animation">
-
                                                     <span class="content-span-1 u-c-white">Find Top Brands</span>
-
                                                     <span class="content-span-2 u-c-white">10% Off On Electronics</span>
-
                                                     <span class="content-span-3 u-c-white">Find electronics on best prices</span>
-
                                                     <span class="content-span-4 u-c-white">Starting At
-
-                                                        <span class="u-c-brand">$1000.00</span></span>
-
+                                                        <span class="u-c-brand">$1000.00</span>
+                                                    </span>
                                                     <a class="shop-now-link btn--e-brand" href="shop-side-version-2.html">SHOP NOW</a></div>
                                             </div>
                                         </div>

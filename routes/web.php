@@ -1,6 +1,7 @@
 <?php
 
 use App\CategoryAll;
+use App\MarketSetting;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +13,18 @@ use App\CategoryAll;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+View::composer('*', function ($view) {
+    // if (auth()->check()) {
+        $iconsjson = file_get_contents('mdi.json');
+        $icons= json_decode($iconsjson,true) ;
+        $iconsjson = file_get_contents('fa.json');
+        $iconsf= json_decode($iconsjson,true) ;
+        $ms=MarketSetting::find(1);
+            $view->with(compact('icons','iconsf','ms'));
+    // }
+});
+
 //Dashboard
 //login
 Route::get('hik', function () {
@@ -58,6 +71,13 @@ Route::group(['middleware' => 'admin'], function(){
     //order management
     Route::get('/admin_panel/management', 'admin_panel\managementController@manage')->name('admin.orderManagement');
     Route::post('/admin_panel/management', 'admin_panel\managementController@update')->name('admin.orderUpdate');
+    //Exclusive Product
+    Route::get('/admin_panel/exclusive_product', 'admin_panel\ExclusiveProductController@index')->name('admin.exclusive.product');
+    //Icons
+    Route::get('/admin_panel/icons', 'Icons\IconController@index')->name('admin.icons');
+    //Market Settings
+    Route::get('/admin_panel/market/settings', 'MarketSettings\MarketSettingsController@index')->name('admin.market.settings');
+    Route::post('/admin_panel/market/settings', 'MarketSettings\MarketSettingsController@store')->name('admin.market.settings');
 
 });
 

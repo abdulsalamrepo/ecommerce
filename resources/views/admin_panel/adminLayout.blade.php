@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="{{asset('vendors/css/vendor.bundle.base.css')}}">
     <link rel="stylesheet" href="{{asset('vendors/css/vendor.bundle.addons.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+
     <!-- endinject -->
     <!-- plugin css for this page -->
     <!-- End plugin css for this page -->
@@ -42,6 +45,41 @@
     color: #fafbfc;
 }
 
+a#uploadPhotoBtn
+{
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    width: 100px;
+    height: 100px;
+    background: #d61f4f;
+    display: -webkit-box;
+    display: flex;
+    border: 1px solid #d61f1f;
+    color: white;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 5px;
+    font-size: 14px;
+    box-shadow: 0 0 5px;
+    /* margin: .3rem; */
+    width: 30%;
+    margin-left: 7%;
+}
+
+#uploadPhotoBtn:hover
+{
+    background: #c7c7c7;
+    text-decoration: none;
+}
+.background_pre_gray
+{
+    /* background-color: #bfb5b5; */
+    padding: 5px;
+    font-size: 25px;
+}
     </style>
     @yield('head')
 
@@ -60,6 +98,19 @@
                 </a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center">
+                <div class="navbar-nav" style="font-size: 25px">
+                        <div >
+                            <a class="nav-link m-2"  href="{{route('admin.icons')}}" target="_blank"" >
+                                <span class="profile-text" style="color: white" title="icon list"><i class="fa fa-list" aria-hidden="true"> </i></span>
+                            </a>
+                        </div>
+                        <div >
+                            <a class="nav-link m-2"  href="{{route('user.home')}}" target="_blank"" >
+                                <span class="profile-text" style="color: white" title="go to store"><i class="fa fa-home" aria-hidden="true"> </i></span>
+                            </a>
+                        </div>
+                </div>
+
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item dropdown d-none d-xl-inline-block">
                         <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
@@ -79,12 +130,13 @@
                     <span class="mdi mdi-menu"></span>
                 </button>
             </div>
+
         </nav>
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <!-- partial:partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
-                <ul class="nav">
+                <ul class="nav" style="position: fixed">
                     <li class="nav-item nav-profile">
                         <div class="nav-link">
                             <div class="user-wrapper">
@@ -125,6 +177,24 @@
                             <span class="menu-title">Order Management</span>
                         </a>
                     </li>
+                    <li class="nav-item {{Route::is('admin.categories') ? 'active' : ''}}">
+                        <a class="nav-link" href="{{route('admin.orderManagement')}}">
+                            <i class="menu-icon mdi mdi-attachment"></i>
+                            <span class="menu-title">Slides</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{Route::is('admin.market.settings') ? 'active' : ''}}">
+                        <a class="nav-link" href="{{route('admin.market.settings')}}">
+                            <i class="menu-icon mdi mdi-account-settings"></i>
+                            <span class="menu-title">Market Settings</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{Route::is('admin.categories') ? 'active' : ''}}">
+                        <a class="nav-link" href="{{route('admin.exclusive.product')}}">
+                            <i class="menu-icon mdi mdi-reproduction"></i>
+                            <span class="menu-title">Exclusive Products</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <!-- partial -->
@@ -161,6 +231,9 @@
     <!--    Jquery Validation-->
     <script src="{{asset('js/lib/jquery.js')}}"></script>
     <script src="{{asset('js/dist/jquery.validate.js')}}"></script>
+    <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+@yield('js')
     <!-- End custom js for this page-->
 </body>
 

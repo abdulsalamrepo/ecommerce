@@ -17,6 +17,8 @@ class Product extends Model
         'description',
         'colors',
         'price',
+        'size',
+        'material',
         'discount',
         'tag',
         'category_id'
@@ -26,6 +28,6 @@ class Product extends Model
     {
     	return $this->belongsTo('App\Category','category_id','id');
     }
-    
-    
+
+
 }

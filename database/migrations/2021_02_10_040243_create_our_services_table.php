@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoryAllsTable extends Migration
+class CreateOurServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateCategoryAllsTable extends Migration
      */
     public function up()
     {
-        Schema::create('category_alls', function (Blueprint $table) {
+        Schema::create('our_services', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('title');
+            $table->string('description');
             $table->string('icon');
             $table->boolean('is_active')->default(true);
-            $table->integer('sort')->default(0);
-            $table->unsignedBigInteger('parent_category_id')->default(0);
-            $table->foreign('parent_category_id')->references('id')->on('category_all')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateCategoryAllsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_alls');
+        Schema::dropIfExists('our_services');
     }
 }

@@ -21,7 +21,7 @@ class managementController extends Controller
 	         ->with('products',[])
 	         ->with('sale',[]);
         }
-        
+
         $cart=[];
         $product=[];
         $users=[];
@@ -42,8 +42,9 @@ class managementController extends Controller
         }
         //dd($users);
         //dd($users[0]->area);
-        
-         return view('admin_panel.orders.index')->with('all',$cart)
+
+         return view('admin_panel.orders.index')
+         ->with('all',$cart)
          ->with('products',$product)
          ->with('sale',$res1)
          ->with('users',$users)
@@ -60,7 +61,7 @@ class managementController extends Controller
     		$n->save();
     	}
 
-    	
+
 
 
     	$res1= sale::all();
@@ -70,7 +71,7 @@ class managementController extends Controller
 	         ->with('products',[])
 	         ->with('sale',[]);
         }
-        
+
         $cart=[];
         $product=[];
         foreach($res1 as $r )

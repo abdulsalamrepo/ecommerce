@@ -12,13 +12,16 @@ class User extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'full_name',
+        'first_name',
+        'last_name',
         'email',
         'password',
         'phone',
         'prev_password',
-        'address_id'
+        'day',
+        'month',
+        'year',
+        'gender',
     ];
 
     public function addresses()
