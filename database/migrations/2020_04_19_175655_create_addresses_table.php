@@ -14,10 +14,13 @@ class CreateAddressesTable extends Migration
     public function up()
     {
         Schema::create('addresses', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id('id');
             $table->text('area');
             $table->text('city');
             $table->integer('zip');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->boolean('default')->default(false);
             $table->timestamps();
         });
     }

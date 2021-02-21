@@ -17,14 +17,14 @@ class userController extends Controller
     {
     	$res = Product::all();
         $cat = Category::all();
-    	return view('store.index')
+    	return view('store2.index_s')
             ->with('products', $res)
             ->with("cat", $cat)
             ->with('index', 1);
     }
     public function view($id)
     {
-        
+
         $res = Product::find($id);
         $res1 = Product::all();
         $cat=Category::find($res->category_id);
@@ -34,7 +34,7 @@ class userController extends Controller
             ->with('product', $res)
             ->with('products', $res1)
             ->with('cat', $cat)
-            ->with('colors',$colorList);   
+            ->with('colors',$colorList);
     }
 
     public function search(Request $r){
@@ -86,7 +86,7 @@ class userController extends Controller
     public function post($id,orderRequest $r)
     {
         //dd($r->discount_price_holder);
-        
+
         if(!(Session::has('cart')))
         {
             Session::put('orderCounter',1);
@@ -138,10 +138,10 @@ class userController extends Controller
             ->with('prod',$product)
             ->with('total',Session::get('price'));
     }
-    
+
 //    for quntity control in cart
         public function editCart(Request $r)
-    {    
+    {
         $newres = Product::all();
         $newcat = Category::all();
         $newcart=[];
@@ -157,7 +157,7 @@ class userController extends Controller
         {
                 if($t[0]==$r->pid && $t[3]==$r->oSerial)
                 {
-                    
+
                     $t[1]=$r->newQ;
                 }
                 if(!(Session::has('tempCart')))
@@ -172,12 +172,12 @@ class userController extends Controller
                     $mytotal=Session::get('tempCart').",".$str2;
                     Session::put('tempCart',$mytotal);
                 }
-                
+
         }
             Session::forget('cart');
             Session::put('cart',Session::get('tempCart'));
             Session::forget('tempCart');
-            
+
             //for price update
             $res = Product::all();
             $cat = Category::all();
@@ -197,27 +197,27 @@ class userController extends Controller
                 $cost_after_quantity=$a[1]*$res->discount;
                 $cost+= $cost_after_quantity;
                 Session::put('price',$cost);
-               
+
             }
             //dd(Session::get('price'));
-            //end 
+            //end
             //dd($myarr);
             $szn[0]=Session::get('cart');
             $szn[1]=Session::get('price');
             $szn[2]=$cost;
-            
+
 
             return json_encode($szn);
-            exit;    
-            
-             
+            exit;
+
+
     }
 //    for quntity control in cart ENDS
-    
+
     public function deleteCartItem(Request $r)
     {
-        
-        
+
+
         $counter=0;
         $newtotalCart = explode(',',Session::get('cart'));
         //dd(Session::get('cart'));
@@ -226,44 +226,44 @@ class userController extends Controller
             $newcart[]=explode(':',$c);
         }
         foreach($newcart as $t)
-        {   
+        {
                 if($t[3]==$r->serial)
                 {
                     $another_counter=$counter;
                 }
                 $counter++;
-        } 
+        }
         array_splice($newtotalCart, $another_counter, 1);
-        
+
         //testing Starts
         //dd(Session::get('tempCart'));
          foreach($newtotalCart as $c2)
         {
-             
+
             $newcart2[]=explode(':',$c2);
         }
-        
+
         if($newtotalCart==null)
         {
             Session::forget('cart');
             Session::forget('price');
             Session::forget('orderCounter');
             return json_encode("Empty");
-            exit;     
-            
+            exit;
+
         }
-        
+
         else
         {
             foreach($newcart2 as $t2)
         {
-               
+
                 if(!(Session::has('tempCart')))
                 {
 
                     $str2=$t2[0].":".$t2[1].":".$t2[2].":".$t2[3];
                     Session::put('tempCart',$str2);
-                   
+
 
                 }
                 else
@@ -272,13 +272,13 @@ class userController extends Controller
                     $mytotal2=Session::get('tempCart').",".$str2;
                     Session::put('tempCart',$mytotal2);
                 }
-                
+
         }
-            
+
             Session::forget('cart');
             Session::put('cart',Session::get('tempCart'));
             Session::forget('tempCart');
-            
+
             //for price update
             $res = Product::all();
             $cat = Category::all();
@@ -298,37 +298,37 @@ class userController extends Controller
                 $cost_after_quantity=$a[1]*$res->discount;
                 $cost+= $cost_after_quantity;
                 Session::put('price',$cost);
-               
+
             }
             $szn[0]=Session::get('cart');
             $szn[1]=Session::get('price');
             $szn[2]=$cost;
             $szn[3]=$r->serial;
             return json_encode($szn);
-            exit; 
+            exit;
         }
-            
-        
-        
-        
-        
+
+
+
+
+
         //testing ends
     }
-    
-    
+
+
     public function confirm(Request $r)
-    {  
+    {
         if($r->has('order'))
         {
             if(Session::has('user'))
             {
-                
+
                 $sales= new sale();
                 $sales->user_id=session('user')->id;
                 $sales->product_id=session('cart');
                 $sales->order_status='Placed';
                 $sales->price=session('price');
-               
+
                 $sales->save();
            // dd(1);
             Session::forget('cart');
@@ -340,11 +340,11 @@ class userController extends Controller
             else{
                 return redirect()->route('user.cart');
             }
-            
+
         }
 
         if($r->has('signup'))
-        { 
+        {
             $validatedData = $r->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -373,7 +373,7 @@ class userController extends Controller
             Session::put('user',$user);
             return redirect()->route('user.cart');
         }
-       
+
     }
     public function history(Request $r)
     {
@@ -384,7 +384,7 @@ class userController extends Controller
                  ->with('products',[])
                  ->with('sale',[]);
         }
-        
+
         $cart=[];
         $product=[];
         $id=[];
@@ -401,7 +401,7 @@ class userController extends Controller
         }
         $res = Product::all();
         $cat = Category::all();
-          //dd($cart); 
+          //dd($cart);
          return view('store.history')
          ->with('products', $res)
          ->with("cat", $cat)
@@ -409,5 +409,5 @@ class userController extends Controller
          ->with('prods',$product)
          ->with('sale',$res1);
     }
-    
+
 }

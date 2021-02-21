@@ -12,61 +12,77 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('users')->delete();
-        
+
         \DB::table('users')->insert(array (
-            0 => 
+            0 =>
             array (
                 'id' => 1,
-                'full_name' => 'John Doe',
+                'first_name' => 'John',
+                'last_name' => 'Doe',
                 'email' => 'john@examle.com',
-                'password' => '12345',
+                'password' => Hash::make('12345'),
                 'prev_password' => NULL,
-                'address_id' => 1,
+                'day' => '10',
+                'month' => '4',
+                'year' => '1996',
+                'gender' => 'male',
                 'phone' => '01711001133',
                 'created_at' => '2019-02-09',
                 'updated_at' => '2019-02-09',
             ),
-            1 => 
+            1 =>
             array (
                 'id' => 2,
-                'full_name' => 'Shakib Mostahid',
+                'first_name' => 'Shakib',
+                'last_name' => 'Mostahid',
                 'email' => 'b@gmail.com',
-                'password' => '12345',
+                'password' => Hash::make('12345'),
                 'prev_password' => NULL,
-                'address_id' => 2,
+                'day' => '10',
+                'month' => '4',
+                'year' => '1996',
+                'gender' => 'male',
                 'phone' => '01922991100',
                 'created_at' => '2019-02-11',
                 'updated_at' => '2019-02-11',
             ),
-            2 => 
+            2 =>
             array (
                 'id' => 3,
-                'full_name' => 'Nishat Ashraf',
+                'first_name' => 'Nishat',
+                'last_name' => 'Ashraf',
                 'email' => 'c@gmail.com',
-                'password' => '12345',
+                'password' => Hash::make('12345'),
                 'prev_password' => NULL,
-                'address_id' => 3,
+                'day' => '10',
+                'month' => '4',
+                'year' => '1996',
+                'gender' => 'male',
                 'phone' => '01899001144',
                 'created_at' => '2019-02-11',
                 'updated_at' => '2019-02-11',
             ),
-            3 => 
+            3 =>
             array (
                 'id' => 4,
-                'full_name' => 'Ayomi Hridy',
+                'first_name' => 'Ayomi',
+                'last_name' => 'Hridy',
                 'email' => 'd@gmail.com',
-                'password' => '12345',
+                'password' => Hash::make('12345'),
                 'prev_password' => NULL,
-                'address_id' => 4,
+                'day' => '10',
+                'month' => '4',
+                'year' => '1996',
+                'gender' => 'male',
                 'phone' => '0111111111',
                 'created_at' => '2019-02-11',
                 'updated_at' => '2019-02-11',
             ),
         ));
-        
-        
+
+
     }
 }

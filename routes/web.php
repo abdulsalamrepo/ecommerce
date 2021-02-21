@@ -15,7 +15,7 @@ use App\CategoryAll;
 //Dashboard
 //login
 Route::get('hik', function () {
-return view('store2.dashboard');
+return view('store2.index_s');
 });
 
 Route::get('test', function () {
@@ -90,7 +90,14 @@ Route::post('/delete_item_from_cart', 'user\userController@deleteCartItem')->nam
 
 
 Route::get('/logout', 'loginController@userLogout')->name('user.logout');
+Route::get('/address', 'user\AddressController@index')->name('address');
+Route::get('/address/{id}', 'user\AddressController@edit')->name('address.edit');
+Route::get('/address/default/{id}', 'user\AddressController@editDefault')->name('address.default');
+Route::post('/address/default', 'user\AddressController@storeDefault')->name('address.default.update');
+Route::post('/address/delete/{id}', 'user\AddressController@delete')->name('address.delete');
+Route::post('/address', 'user\AddressController@store')->name('address.save');
 
 Route::group(['middleware' => 'user'], function(){
 Route::get('/history', 'user\userController@history')->name('user.history');
+
 });

@@ -21,21 +21,17 @@ class loginController extends Controller
     }
     public function adminLogout()
     {
-        session()->flush();   
+        session()->flush();
     	return redirect()->route('admin.login');
     }
     public function adminPosted(AdminLoginVerifyRequest $request)
-    {  
+    {
         $admin = Admin::where('username',$request->Username)->first();
-        
         if($admin==null)
         {
-            
             $request->session()->flash('message', 'Invalid Username');
-            
             return redirect(route('admin.login'));
         }
-        
         else
         {
             if($request->Password==$admin->password)
@@ -44,18 +40,18 @@ class loginController extends Controller
                 //$request->session()->put('username', $request->Username);
                 return redirect()->route('admin.dashboard');
             }
-            
+
             else if($request->Password!=$admin->password)
             {
                 $request->session()->flash('message', 'Invalid Password');
                 return view('admin_panel.adminLogin');
             }
         }
-        
-        
-        
+
+
+
     }
-    
+
     public function userIndex()
     {
         if(session()->has('user')){
@@ -65,7 +61,7 @@ class loginController extends Controller
         $res = Product::all();
         $cat = Category::all();
 
-        return view('store.login')
+        return view('store2.login')
         ->with('products', $res)
         ->with("cat", $cat);
 
@@ -80,7 +76,7 @@ class loginController extends Controller
         if($user==null)
         {
             $request->session()->flash('message', 'Invalid User');
-    		
+
             return redirect()->route('user.login');
         }
         else

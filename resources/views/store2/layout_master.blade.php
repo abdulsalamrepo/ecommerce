@@ -21,6 +21,61 @@
 
     <!--====== App ======-->
     <link rel="stylesheet" href="{{asset('store2/css/app.css')}}">
+    <style>
+        .fade.show {
+    opacity: 1;
+}
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+.alert-dismissible {
+    padding-right: 4rem;
+}
+.alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+.fade {
+    opacity: 0;
+    transition: opacity .15s linear;
+}
+.close:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+.close:focus, .close:hover {
+    color: #000;
+    text-decoration: none;
+    opacity: .75;
+}
+.alert-dismissible .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .75rem 1.25rem;
+    color: inherit;
+}
+button.close {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-appearance: none;
+}
+
+.close {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+}
+    </style>
 </head>
 <body class="config" id="js-scrollspy-trigger">
     <div class="preloader is-active">
@@ -31,34 +86,7 @@
 
     <!--====== Main App ======-->
     <div id="app">
-        <div class="fixed-list">
-            <ul class="nav" id="init-scrollspy">
-                <li>
 
-                    <a class="nav-link" href="#electronic-01" data-click-scroll="#electronic-01"><i class="fas fa-tv"></i></a></li>
-                <li>
-
-                    <a class="nav-link" href="#female-02" data-click-scroll="#female-02"><i class="fas fa-female"></i></a></li>
-                <li>
-
-                    <a class="nav-link" href="#male-03" data-click-scroll="#male-03"><i class="fas fa-male"></i></a></li>
-                <li>
-
-                    <a class="nav-link"><i class="fas fa-fighter-jet"></i></a></li>
-                <li>
-
-                    <a class="nav-link"><i class="fas fa-cookie-bite"></i></a></li>
-                <li>
-
-                    <a class="nav-link"><i class="fas fa-futbol"></i></a></li>
-                <li>
-
-                    <a class="nav-link"><i class="fas fa-book-open"></i></a></li>
-                <li>
-
-                    <a class="nav-link"><i class="fas fa-briefcase-medical"></i></a></li>
-            </ul>
-        </div>
 
         <!--====== Main Header ======-->
         <header class="header--style-2">
@@ -74,7 +102,7 @@
 
                         <a class="main-logo" href="index-2.html">
 
-                            <img src="{{asset('store2/images/logo/logo-2.png')}}" alt=""></a>
+                            <img width="75" src="{{asset('store2/images/logo/logo-2.png')}}" alt=""></a>
                         <!--====== End - Main Logo ======-->
 
 
@@ -1195,16 +1223,17 @@
     <!--====== End - Main App ======-->
 
 
-
+    {{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script> --}}
     <!--====== Vendor Js ======-->
     <script src="{{asset('store2/js/vendor.js')}}"></script>
+    <script src="{{asset('js/dist/jquery.validate.js')}}"></script>
 
     <!--====== jQuery Shopnav plugin ======-->
     <script src="{{asset('store2/js/jquery.shopnav.js')}}"></script>
 
     <!--====== App ======-->
     <script src="{{asset('store2/js/app.js')}}"></script>
-
+@yield('js')
     <!--====== Noscript ======-->
     <noscript>
         <div class="app-setting">
