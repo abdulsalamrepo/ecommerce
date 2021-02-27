@@ -17,8 +17,8 @@
                           <input type="text" class="form-control" id="exampleInputEmail1" name="Name" value="{{$category->name}}" disabled>
                         </div>
                         <div class="form-group">
-                          <label for="exampleInputPassword1">Category Type</label>
-                          <textarea type="textarea" class="form-control" name="Type" disabled>{{$category->type}}</textarea>
+                          <label for="exampleInputPassword1">Category Icon</label>
+                          <input type="text" class="form-control" name="Type" disabled value="{{$category->type}}">
                         </div>
                         <input  type="submit" name="updateButton"  class="btn btn-danger mr-2" id="updateButton" value="DELETE" />
                       </form>

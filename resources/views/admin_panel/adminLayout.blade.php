@@ -88,13 +88,15 @@ a#uploadPhotoBtn
 <body>
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
-        <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row p-0">
             <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
                 <a class="navbar-brand brand-logo" href="{{route('admin.dashboard')}}">
-                    <div style="color: #007bff;">Electro</div>
+                    <div>
+                        <img src="{{asset($ms->logo)}}" style="height:60px;">
+                        </div>
                 </a>
                 <a class="navbar-brand brand-logo-mini" href="{{route('admin.dashboard')}}">
-                    <div style="color: #007bff;">Electro</div>
+                    <div style="color: #007bff;">{{$ms->name}}</div>
                 </a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center">
@@ -114,7 +116,7 @@ a#uploadPhotoBtn
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item dropdown d-none d-xl-inline-block">
                         <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                            <span class="profile-text">{{session()->get('admin')->name}}</span>
+                            <span class="profile-text">{{$ms->name}}</span>
                             <img class="img-xs rounded-circle" src="{{asset('images/faces/face1.jpg')}}" alt="Profile image">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
@@ -143,8 +145,8 @@ a#uploadPhotoBtn
                                 <div class="profile-image">
                                     <img src="{{asset('images/faces/face1.jpg')}}" alt="profile image">
                                 </div>
-                                <div class="text-wrapper">
-                                    <p class="profile-name">{{session()->get('admin')->name}}</p>
+                                <div class="text-wrapper" >
+                                    <p class="profile-name" style="color: white">{{$ms->name}}</p>
                                     <div>
                                         <small class="designation text-muted">Admin</small>
                                         <span class="status-indicator online"></span>
@@ -177,8 +179,8 @@ a#uploadPhotoBtn
                             <span class="menu-title">Order Management</span>
                         </a>
                     </li>
-                    <li class="nav-item {{Route::is('admin.categories') ? 'active' : ''}}">
-                        <a class="nav-link" href="{{route('admin.orderManagement')}}">
+                    <li class="nav-item {{Route::is('admin.slides') ? 'active' : ''}}">
+                        <a class="nav-link" href="{{route('admin.slides')}}">
                             <i class="menu-icon mdi mdi-attachment"></i>
                             <span class="menu-title">Slides</span>
                         </a>

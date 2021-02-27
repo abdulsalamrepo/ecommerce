@@ -25,8 +25,8 @@
                           <input type="text" class="form-control" id="Name" name="Name" value="{{$category->name}}">
                         </div>
                         <div class="form-group">
-                          <label for="exampleInputPassword1">Category Type</label>
-                          <textarea type="textarea" class="form-control" id="Type" name="Type" >{{$category->type}}</textarea>
+                          <label for="exampleInputPassword1">Category Icon</label>
+                          <input type="text" class="form-control" id="Type" name="Type" value=" {{$category->type}}">
                         </div>
                         <input  type="submit" name="updateButton"  class="btn btn-success mr-2" id="updateButton" value="UPDATE" />
                       </form>
@@ -38,11 +38,11 @@
             </div>
           </div>
         </div>
-    
-    
+
+
     <!--JQUERY Validation-->
 <script>
-	
+
 	$(document).ready(function() {
 		// validate the comment form when it is submitted
 		//$("#commentForm").validate();
@@ -52,18 +52,18 @@
 			rules: {
 				Name: "required",
 				Type: "required",
-				
-				
-				
+
+
+
 			},
 			messages: {
 				Name: "Category Name is Required",
 				Type: "Category Type is Required",
-                	
+
 			}
 		});
 
-		
+
 	});
 	</script>
 <!--/JQUERY Validation-->

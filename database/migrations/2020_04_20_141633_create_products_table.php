@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->engine = 'MyISAM';
             $table->increments('id');
             $table->string('name');
+            $table->string('manufacturer')->default('');
             $table->text('image_name');
             $table->text('description');
             $table->text('colors');
@@ -24,9 +25,7 @@ class CreateProductsTable extends Migration
             $table->integer('discount');
             $table->text('tag');
             $table->integer('category_id')->unsigned();
-            $table->foreign('category_id')
-                ->references('id')->on('categories')
-                ->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

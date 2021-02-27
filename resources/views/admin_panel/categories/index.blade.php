@@ -1,4 +1,5 @@
-@extends('admin_panel.adminLayout') @section('content')
+@extends('admin_panel.adminLayout')
+@section('content')
 <script src="{{asset('js/lib/jquery.js')}}"></script>
 <script src="{{asset('js/dist/jquery.validate.js')}}"></script>
 <style>label.error {
@@ -8,14 +9,12 @@
   padding:1px 20px 1px 20px;
 }</style>
 
-
-
 <div class="content-wrapper">
     <div class="row">
         <div class="col-12 stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Add Categories</h4>
+                    <h4 class="card-title">Add Category</h4>
                     <form class="forms-sample" method="post" id="cat_form">
                         {{csrf_field()}}
                         <div class="form-group row">
@@ -25,18 +24,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Category Parent</label>
+                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Icon</label>
                             <div class="col-sm-9">
-                                <select name="parent_category" class="form-control" style="padding-left: 45%;border-radius: 10px;font-size: 15px;">
-                                    <option value="">None</option>
-                                    @foreach ($categories as $category)
-                                        <option value="{{$category->id}}" >{{$category->name}}</option>
-                                    @endforeach
-                                </select>
-                                {{-- <input type="text" class="form-control" name="Type" id="Type" placeholder="Enter Category Type"> --}}
+                                <input type="text" class="form-control" name="Icon"  placeholder="Enter Icon of Category">
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-success mr-2">Submit</button>
+                        <button type="submit" class="btn btn-success mr-2">Add</button>
                     </form>
                     @if($errors->any())
                     <ul>
@@ -58,53 +51,25 @@
                 <div class="card-body">
                     <h4 class="card-title">Categories Table</h4>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="categories">
                             <thead>
                                 <tr>
                                     <th>
                                         Name
                                     </th>
                                     <th>
-                                        Type
-                                    </th>
-                                    <th>
                                         Created At
                                     </th>
                                     <th>
-                                        Updated At
+                                        Icon
                                     </th>
                                     <th>
-                                        Edit
-                                    </th>
-                                    <th>
-                                        Update
+                                        Action
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach($catlist as $cat)
-                                <tr>
-                                    <td>
-                                        {{$cat->name}}
-                                    </td>
-                                    <td>
-                                        {{$cat->type}}
-                                    </td>
-                                    <td>
-                                        {{$cat->created_at}}
-                                    </td>
-                                    <td>
-                                        {{$cat->updated_at}}
-                                    </td>
-                                    <td>
-                                        <a href="{{route('admin.categories.edit', ['id' => $cat->id])}}" class="btn btn-warning">Edit</a>
-                                    </td>
-                                    <td>
-                                        <a href="{{route('admin.categories.delete', ['id' => $cat->id])}}" onclick="delete()" class="btn btn-danger">Delete</a>
-                                    </td>
-                                </tr>
-                                @endforeach --}}
-@foreach($catlist as $cat)
+{{-- @foreach($catlist as $cat)
 <tr>
     <td>
         {{$cat->name}}
@@ -125,7 +90,7 @@
         <a href="{{route('admin.categories.delete', ['id' => $cat->id])}}" onclick="delete()" class="btn btn-danger">Delete</a>
     </td>
 </tr>
-@endforeach
+@endforeach --}}
                             </tbody>
                         </table>
                     </div>
@@ -133,32 +98,86 @@
             </div>
         </div>
     </div>
+    <form method="POST" action="{{route('admin.categories.add.image')}}" enctype="multipart/form-data" id="addFormImage">
+        @csrf
+        <input type="hidden" name="category_id" id="category_image_id">
+        <input type="file" name="image" accept="image/*" id="inp_files"  class="d-none">
+    </form>
 </div>
-
 
 <!--JQUERY Validation-->
 <script>
-
 	$(document).ready(function() {
-
 		$("#cat_form").validate({
 			rules: {
 				Name: "required",
 				Type: "required",
-
-
-
 			},
 			messages: {
 				Name: "Category Name is Required",
 				Type: "Category Type is Required",
-
 			}
 		});
-
-
 	});
-	</script>
+</script>
 <!--/JQUERY Validation-->
+<script>
+$(document).ready(function() {
+    var dt = $('#categories').DataTable({
+        searching: true,
+        info: false,
+        ajax: {
+                type: 'get',
+                url: 'get_all_categories',
+                dataSrc:'',
+                error: function(xhr, error, thrown)
+                {
+                    dt.ajax.reload();
+                }
+             },
+        columns: [
+            {
+                data: 'name'
+            },
+            {
+                data: 'created_at'
+            },
+            {
+                "render": function ( data, type, full, meta )
+                 {
+                     return `
+                     <div style="font-size: 25px;">
+                        <i class="${full.type}" aria-hidden="true"></i>
+                     </div>
+                     `;
+                 }
+            },
+            {
+                 sortable: false,
+                 "render": function ( data, type, full, meta )
+                 {
+                     return `
+                     <div class="btn-group">
+                        <a href="javascript:void(0)" onclick="clickAddImage(this)" data-id="${full.id}" class="btn btn-primary btn-sm "><i class="fa fa-plus" aria-hidden="true"></i><i class="fa fa-image" aria-hidden="true"></i></a>
+                        <a href="/admin_panel/categories/delete/${full.id}"class="btn btn-danger btn-sm "><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <a href="/admin_panel/categories/edit/${full.id}" class="btn btn-warning btn-sm "><i class="fa fa-edit"></i></a>
+                     </div>
+                     `;
+                 }
+             }
+        ],
+    });
+    $('#inp_files').change(function (e) {
+        e.preventDefault();
+        $('#addFormImage').submit();
+    });
+});
+
+function clickAddImage(e)
+{
+    document.getElementById('category_image_id').value = e.dataset['id'];
+    document.getElementById('inp_files').click();
+}
+</script>
 
 @endsection

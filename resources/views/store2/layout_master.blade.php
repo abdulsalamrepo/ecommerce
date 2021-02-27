@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="{{asset('store2/images/favicon.png')}}" rel="shortcut icon">
-    <title>Ludus - Electronics, Apparel, Computers, Books, DVDs & more</title>
+    <link href="{{asset('store2/images/logo/logo-2.png')}}" rel="shortcut icon">
+    <title>Sanofa - Electronics, Apparel, Computers, Books, DVDs & more</title>
 
     <!--====== Google Font ======-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
@@ -18,9 +18,11 @@
 
     <!--====== Utility-Spacing ======-->
     <link rel="stylesheet" href="{{asset('store2/css/utility.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.0/css/font-awesome.min.css">
 
     <!--====== App ======-->
     <link rel="stylesheet" href="{{asset('store2/css/app.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
     <style>
         .fade.show {
     opacity: 1;
@@ -81,7 +83,7 @@ button.close {
     <div class="preloader is-active">
         <div class="preloader__wrap">
 
-            <img class="preloader__img" src="{{asset('store2/images/preloader.png')}}" alt=""></div>
+            <img class="preloader__img" src="{{asset('store2/images/logo/logo-2.png')}}" alt=""></div>
     </div>
 
     <!--====== Main App ======-->
@@ -106,10 +108,11 @@ button.close {
                         <!--====== End - Main Logo ======-->
 
                         <!--====== Search Form ======-->
-                        <form class="main-form">
+                        <form action="{{route('user.search')}}" method="get" class="main-form">
                             <label for="main-search"></label>
-                            <input class="input-text input-text--border-radius input-text--style-2" type="text" id="main-search" placeholder="Search">
-                            <button class="btn btn--icon fas fa-search main-search-button" type="submit"></button></form>
+                            <input class="input-text input-text--border-radius input-text--style-2" type="text" id="main-search" name="n" placeholder="Search here" placeholder="Search">
+                            <button class="btn btn--icon fas fa-search main-search-button" type="submit"></button>
+                        </form>
                         <!--====== End - Search Form ======-->
                         <!--====== Dropdown Main plugin ======-->
                         <div class="menu-init" id="navigation">
@@ -124,26 +127,31 @@ button.close {
                                         <!--====== Dropdown ======-->
                                         <span class="js-menu-toggle"></span>
                                         <ul style="width:120px">
+
+@guest
+                                            <li>
+                                                <a href="{{route('user.signup')}}"><i class="fas fa-user-plus u-s-m-r-6"></i>
+                                                    <span>Signup</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{route('user.login')}}"><i class="fas fa-lock u-s-m-r-6"></i>
+                                                    <span>Signin</span>
+                                                </a>
+                                            </li>
+@else
                                             <li>
                                                 <a href="dashboard.html"><i class="fas fa-user-circle u-s-m-r-6"></i>
                                                     <span>Account</span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="signup.html"><i class="fas fa-user-plus u-s-m-r-6"></i>
-                                                    <span>Signup</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="signin.html"><i class="fas fa-lock u-s-m-r-6"></i>
-                                                    <span>Signin</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="signup.html"><i class="fas fa-lock-open u-s-m-r-6"></i>
+                                                <a href="{{route('user.logout')}}"><i class="fas fa-lock-open u-s-m-r-6"></i>
                                                     <span>Signout</span>
                                                 </a>
                                             </li>
+@endguest
+
                                         </ul>
                                         <!--====== End - Dropdown ======-->
                                     </li>
@@ -214,318 +222,58 @@ button.close {
 
                                 <span class="ah-close">✕ Close</span>
 
-                                <!--====== List ======-->
-                                <ul class="ah-list">
-                                    <li class="has-dropdown">
+    <!--====== List ======-->
+    <ul class="ah-list">
+        <li class="has-dropdown">
+
+            <span class="mega-text" style="width: max-content;padding:5px;height: max-content;">Categories</span>
+            <span class="js-menu-toggle"></span>
+            <div class="mega-menu">
+
+            <!--====== Mega Menu ======-->
+            <div class="mega-menu-wrap">
+
+                    <div class="mega-menu-list">
+                        <ul>
+            @foreach ($cat as $key => $item)
+
+                            <li class="{{$key == 0 ? 'js-active':''}}">
+                                {{-- <li class="js-active"> --}}
+                                <a href="{{route('user.search.cat',['id'=>$item->id])}}">
+                                    <i class="{{$item->type}} u-s-m-r-6"></i>
+                                    <span>{{$item->name}}</span>
+                                </a>
+                                <span class="js-menu-toggle"></span>
+                            </li>
+            @endforeach
+
+                        </ul>
+                    </div>
+                    @foreach ($cat as $key => $item)
+    <!--======  ======-->
+    <div class="mega-menu-content {{$key == 0 ? 'js-active':''}}">
+        {{-- <div class="mega-menu-content js-active"> --}}
+        <div class="row">
+            @foreach ($item->images as $i)
+            <div class="col-lg-4 mega-image">
+                <div class="mega-banner">
+                    <a class="u-d-block" href="javascript:;">
+                        <img class="u-img-fluid u-d-block" src="{{asset($i->image_path)}}" alt="">
+                    </a>
+                </div>
+            </div>
+            @endforeach
+
+        </div>
+    </div>
+    <!--====== End  ======-->
+    @endforeach
+
+</div>
+
+</div>
+<!--====== End - Mega Menu ======-->
 
-                                        <span class="mega-text">M</span>
-
-                                        <!--====== Mega Menu ======-->
-
-                                        <span class="js-menu-toggle"></span>
-                                        <div class="mega-menu">
-                                            <div class="mega-menu-wrap">
-                                                <div class="mega-menu-list">
-                                                    <ul>
-                                                        {{-- <li class="js-active">
-
-                                                            <a href="shop-side-version-2.html"><i class="fas fa-tv u-s-m-r-6"></i>
-
-                                                                <span>Electronics</span></a>
-
-                                                            <span class="js-menu-toggle js-toggle-mark"></span></li> --}}
-                                                        {{-- <li>
-
-                                                            <a href="shop-side-version-2.html"><i class="fas fa-female u-s-m-r-6"></i>
-
-                                                                <span>Women's Clothing</span></a>
-
-                                                            <span class="js-menu-toggle"></span></li> --}}
-                                                            <li class="js-active">
-
-                                                            <a href="shop-side-version-2.html"><i class="fas fa-male u-s-m-r-6"></i>
-
-                                                                <span>Men's Clothing</span></a>
-
-                                                            <span class="js-menu-toggle"></span></li>
-                                                        {{-- <li>
-
-                                                            <a href="index-2.html"><i class="fas fa-utensils u-s-m-r-6"></i>
-
-                                                                <span>Food & Supplies</span></a>
-
-                                                            <span class="js-menu-toggle"></span></li>
-                                                        <li>
-
-                                                            <a href="index-2.html"><i class="fas fa-couch u-s-m-r-6"></i>
-
-                                                                <span>Furniture & Decor</span></a>
-
-                                                            <span class="js-menu-toggle"></span></li>
-                                                        <li>
-
-                                                            <a href="index-2.html"><i class="fas fa-football-ball u-s-m-r-6"></i>
-
-                                                                <span>Sports & Game</span></a>
-
-                                                            <span class="js-menu-toggle"></span></li>
-                                                        <li>
-
-                                                            <a href="index-2.html"><i class="fas fa-heartbeat u-s-m-r-6"></i>
-
-                                                                <span>Beauty & Health</span></a>
-
-                                                            <span class="js-menu-toggle"></span></li> --}}
-                                                    </ul>
-                                                </div>
-
-
-
-                                                <!--====== Men ======-->
-                                                <div class="mega-menu-content js-active">
-
-                                                    <!--====== Mega Menu Row ======-->
-                                                    <div class="row">
-                                                        <div class="col-lg-4 mega-image">
-                                                            <div class="mega-banner">
-
-                                                                <a class="u-d-block" href="shop-side-version-2.html">
-
-                                                                    <img class="u-img-fluid u-d-block" src="{{asset('store2/images/banners/banner-mega-5.jpg')}}" alt=""></a></div>
-                                                        </div>
-                                                        <div class="col-lg-4 mega-image">
-                                                            <div class="mega-banner">
-
-                                                                <a class="u-d-block" href="shop-side-version-2.html">
-
-                                                                    <img class="u-img-fluid u-d-block" src="{{asset('store2/images/banners/banner-mega-6.jpg')}}" alt=""></a></div>
-                                                        </div>
-                                                        <div class="col-lg-4 mega-image">
-                                                            <div class="mega-banner">
-
-                                                                <a class="u-d-block" href="shop-side-version-2.html">
-
-                                                                    <img class="u-img-fluid u-d-block" src="{{asset('store2/images/banners/banner-mega-7.jpg')}}" alt=""></a></div>
-                                                        </div>
-                                                    </div>
-                                                    <!--====== End - Mega Menu Row ======-->
-                                                    <br>
-
-                                                    <!--====== Mega Menu Row ======-->
-                                                    <div class="row">
-                                                        <div class="col-lg-3">
-                                                            <ul>
-                                                                <li class="mega-list-title">
-
-                                                                    <a href="shop-side-version-2.html">HOT SALE</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">T-Shirts</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Tank Tops</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Polo</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Shirts</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <ul>
-                                                                <li class="mega-list-title">
-
-                                                                    <a href="shop-side-version-2.html">OUTWEAR</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Hoodies</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Trench</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Parkas</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Sweaters</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <ul>
-                                                                <li class="mega-list-title">
-
-                                                                    <a href="shop-side-version-2.html">BOTTOMS</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Casual Pants</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Cargo Pants</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Jeans</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Shorts</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <ul>
-                                                                <li class="mega-list-title">
-
-                                                                    <a href="shop-side-version-2.html">UNDERWEAR</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Boxers</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Briefs</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Robes</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Socks</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <!--====== End - Mega Menu Row ======-->
-                                                    <br>
-
-                                                    <!--====== Mega Menu Row ======-->
-                                                    <div class="row">
-                                                        <div class="col-lg-3">
-                                                            <ul>
-                                                                <li class="mega-list-title">
-
-                                                                    <a href="shop-side-version-2.html">JACKETS</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Denim Jackets</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Trucker Jackets</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Windbreaker Jackets</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Leather Jackets</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <ul>
-                                                                <li class="mega-list-title">
-
-                                                                    <a href="shop-side-version-2.html">SUNGLASSES</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Pilot</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Wayfarer</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Square</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Round</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <ul>
-                                                                <li class="mega-list-title">
-
-                                                                    <a href="shop-side-version-2.html">ACCESSORIES</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Eyewear Frames</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Scarves</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Hats</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Belts</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <ul>
-                                                                <li class="mega-list-title">
-
-                                                                    <a href="shop-side-version-2.html">OTHER ACCESSORIES</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Bags</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Wallets</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Watches</a></li>
-                                                                <li>
-
-                                                                    <a href="shop-side-version-2.html">Tech Accessories</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <!--====== End - Mega Menu Row ======-->
-                                                    <br>
-
-                                                    <!--====== Mega Menu Row ======-->
-                                                    <div class="row">
-                                                        <div class="col-lg-6 mega-image">
-                                                            <div class="mega-banner">
-
-                                                                <a class="u-d-block" href="shop-side-version-2.html">
-
-                                                                    <img class="u-img-fluid u-d-block" src="images/banners/banner-mega-8.jpg" alt=""></a></div>
-                                                        </div>
-                                                        <div class="col-lg-6 mega-image">
-                                                            <div class="mega-banner">
-
-                                                                <a class="u-d-block" href="shop-side-version-2.html">
-
-                                                                    <img class="u-img-fluid u-d-block" src="images/banners/banner-mega-9.jpg" alt=""></a></div>
-                                                        </div>
-                                                    </div>
-                                                    <!--====== End - Mega Menu Row ======-->
-                                                </div>
-                                                <!--====== End - Men ======-->
-
-
-                                                <!--====== No Sub Categories ======-->
-                                                <div class="mega-menu-content">
-                                                    <h5>No Categories</h5>
-                                                </div>
-                                                <!--====== End - No Sub Categories ======-->
-
-
-                                                <!--====== No Sub Categories ======-->
-                                                <div class="mega-menu-content">
-                                                    <h5>No Categories</h5>
-                                                </div>
-                                                <!--====== End - No Sub Categories ======-->
-
-
-                                                <!--====== No Sub Categories ======-->
-                                                <div class="mega-menu-content">
-                                                    <h5>No Categories</h5>
-                                                </div>
-                                                <!--====== End - No Sub Categories ======-->
-
-
-                                                <!--====== No Sub Categories ======-->
-                                                <div class="mega-menu-content">
-                                                    <h5>No Categories</h5>
-                                                </div>
-                                                <!--====== End - No Sub Categories ======-->
-                                            </div>
-                                        </div>
-                                        <!--====== End - Mega Menu ======-->
                                     </li>
                                 </ul>
                                 <!--====== End - List ======-->
@@ -549,14 +297,14 @@ button.close {
                                 <ul class="ah-list ah-list--design2 ah-list--link-color-white">
                                     <li>
 
-                                        <a href="shop-side-version-2.html">NEW ARRIVALS</a></li>
+                                        <a href="javascript:;">NEW ARRIVALS</a></li>
 
                                     <li>
 
-                                        <a href="shop-side-version-2.html">CUSTOM SEARCH</a></li>
+                                        <a href="{{route('user.search')}}">ALL PRODUCTS</a></li>
                                     <li>
 
-                                        <a href="shop-side-version-2.html">GIFT CARDS</a></li>
+                                        <a href="javascript:;">CUSTOM SEARCH</a></li>
                                 </ul>
                                 <!--====== End - List ======-->
                             </div>
@@ -581,7 +329,7 @@ button.close {
                                 <ul class="ah-list ah-list--design1 ah-list--link-color-white">
                                     <li>
 
-                                        <a href="index-2.html"><i class="fas fa-home u-c-brand"></i></a></li>
+                                        <a href="{{route('user.home')}}"><i class="fas fa-home u-c-brand"></i></a></li>
                                     <li>
 
                                         <a href="wishlist.html"><i class="far fa-heart"></i></a></li>
@@ -611,7 +359,7 @@ button.close {
 
                                                             <span class="mini-product__category">
 
-                                                                <a href="shop-side-version-2.html">Electronics</a></span>
+                                                                <a href="javascript:;">Electronics</a></span>
 
                                                             <span class="mini-product__name">
 
@@ -639,7 +387,7 @@ button.close {
 
                                                             <span class="mini-product__category">
 
-                                                                <a href="shop-side-version-2.html">Electronics</a></span>
+                                                                <a href="javascript:;">Electronics</a></span>
 
                                                             <span class="mini-product__name">
 
@@ -667,7 +415,7 @@ button.close {
 
                                                             <span class="mini-product__category">
 
-                                                                <a href="shop-side-version-2.html">Women Clothing</a></span>
+                                                                <a href="javascript:;">Women Clothing</a></span>
 
                                                             <span class="mini-product__name">
 
@@ -695,7 +443,7 @@ button.close {
 
                                                             <span class="mini-product__category">
 
-                                                                <a href="shop-side-version-2.html">Men Clothing</a></span>
+                                                                <a href="javascript:;">Men Clothing</a></span>
 
                                                             <span class="mini-product__name">
 
@@ -741,9 +489,20 @@ button.close {
                 </div>
             </nav>
             <!--====== End - Nav 2 ======-->
+
         </header>
         <!--====== End - Main Header ======-->
         @yield('content')
+        <!-- START Bootstrap-Cookie-Alert -->
+        <div class="alert text-center cookiealert" style="position: fixed;bottom: 0" role="alert">
+            <b>Do you like cookies?</b> &#x1F36A; We use cookies to ensure you get the best experience on our website.
+            <a href="https://cookiesandyou.com/" target="_blank">Learn more</a>
+            <button type="button" class="btn btn-primary btn-sm acceptcookies">
+                I agree
+            </button>
+        </div>
+        <!-- END Bootstrap-Cookie-Alert -->
+
         <!--====== Main Footer ======-->
         <footer>
             <div class="outer-footer">
@@ -797,13 +556,13 @@ button.close {
                                                     <a href="dashboard.html">Account</a></li>
                                                 <li>
 
-                                                    <a href="shop-side-version-2.html">Manufacturer</a></li>
+                                                    <a href="javascript:;">Manufacturer</a></li>
                                                 <li>
 
                                                     <a href="dash-payment-option.html">Finance</a></li>
                                                 <li>
 
-                                                    <a href="shop-side-version-2.html">Shop</a></li>
+                                                    <a href="javascript:;">Shop</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -828,7 +587,7 @@ button.close {
                                                     <a href="dash-my-order.html">Delivery</a></li>
                                                 <li>
 
-                                                    <a href="shop-side-version-2.html">Store</a></li>
+                                                    <a href="javascript:;">Store</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -919,13 +678,13 @@ button.close {
                                             <a href="index.hml">Home</a></li>
                                         <li class="has-separator">
 
-                                            <a href="shop-side-version-2.html">Electronics</a></li>
+                                            <a href="javascript:;">Electronics</a></li>
                                         <li class="has-separator">
 
-                                            <a href="shop-side-version-2.html">DSLR Cameras</a></li>
+                                            <a href="javascript:;">DSLR Cameras</a></li>
                                         <li class="is-marked">
 
-                                            <a href="shop-side-version-2.html">Nikon Cameras</a></li>
+                                            <a href="javascript:;">Nikon Cameras</a></li>
                                     </ul>
                                 </div>
                                 <!--====== End - Product Breadcrumb ======-->
@@ -1145,7 +904,7 @@ button.close {
                         <div class="row u-s-m-x-0">
                             <div class="col-lg-6 new-l__col-1 u-s-p-x-0">
 
-                                <a class="new-l__img-wrap u-d-block" href="shop-side-version-2.html">
+                                <a class="new-l__img-wrap u-d-block" href="javascript:;">
 
                                     <img class="u-img-fluid u-d-block" src="images/newsletter/newsletter.jpg" alt=""></a></div>
                             <div class="col-lg-6 new-l__col-2">
@@ -1193,6 +952,10 @@ button.close {
 
     <!--====== App ======-->
     <script src="{{asset('store2/js/app.js')}}"></script>
+
+<!-- Include cookiealert script -->
+<script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
+
 @yield('js')
     <!--====== Noscript ======-->
     <noscript>

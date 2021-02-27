@@ -29,7 +29,7 @@ class managementController extends Controller
         {
 
            // echo "select * from users inner join addresses on users.address_id = addresses.id where users.id = $r->user_id" .'<br>';
-            $users[] = DB::select( DB::raw("select users.id as id , users.full_name as full_name , addresses.area as area , addresses.city as city , addresses.zip as zip from users inner join addresses on users.address_id = addresses.id where users.id = $r->user_id" ) )[0];
+            $users[] = DB::select( DB::raw("select users.id as id , CONCAT( users.first_name, ' ', users.last_name ) as full_name , addresses.area as area , addresses.city as city , addresses.zip as zip from users inner join addresses on users.address_id = addresses.id where users.id = $r->user_id" ) )[0];
              //$users[]=User::find($r->user_id)->with('addresses')->get();
              $totalCart = explode(',',$r->product_id);
              foreach($totalCart as $c)

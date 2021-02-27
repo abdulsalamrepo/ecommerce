@@ -1,15 +1,16 @@
 <?php
 namespace App\Http\Controllers\user;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\orderRequest;
-use Illuminate\Support\Facades\DB;
-use App\Product;
-use App\Category;
+use Session;
 use App\sale;
 use App\User;
+use App\Slide;
 use App\Address;
-use Session;
+use App\Product;
+use App\Category;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\orderRequest;
+use App\Http\Controllers\Controller;
 
 class userController extends Controller
 {
@@ -17,10 +18,12 @@ class userController extends Controller
     {
     	$res = Product::all();
         $cat = Category::all();
+        $slides=Slide::where('view',1)->get();
     	return view('store2.index_s')
             ->with('products', $res)
             ->with("cat", $cat)
-            ->with('index', 1);
+            ->with('index', 1)
+            ->with('slides', $slides);
     }
     public function view($id)
     {
@@ -77,7 +80,7 @@ class userController extends Controller
             $category = -1;
         }
         //dd($sRes);
-    	return view('store.search')
+    	return view('store2.search')
             ->with('products', $sRes)
             ->with("cat", $cat)
             ->with("a", $category);

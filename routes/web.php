@@ -1,6 +1,6 @@
 <?php
 
-use App\CategoryAll;
+use App\Category;
 use App\MarketSetting;
 
 /*
@@ -21,29 +21,24 @@ View::composer('*', function ($view) {
         $iconsjson = file_get_contents('fa.json');
         $iconsf= json_decode($iconsjson,true) ;
         $ms=MarketSetting::find(1);
-            $view->with(compact('icons','iconsf','ms'));
+        $cat=Category::all();
+        foreach ($cat as $key => $c) {
+            $c->images;
+        }
+        $view->with(compact('icons','iconsf','ms','cat'));
     // }
 });
 
 //Dashboard
 //login
 Route::get('hik', function () {
-return view('store2.index_s');
-});
-
-Route::get('test', function () {
-        $c=CategoryAll::first();
-        return response()->json($c->hasChildren());
+    return view('store2.search');
 });
 
 Route::get('admin', 'loginController@adminIndex')->name('admin.login');
 Route::post('admin', 'loginController@adminPosted');
-
 Route::group(['middleware' => 'admin'], function(){
-
-
     Route::get("/admin_panel", 'admin_panel\dashboardController@index')->name('admin.dashboard');
-
     Route::get('admin/logout', 'loginController@adminLogout')->name('admin.logout');
     //categories
     Route::get('/admin_panel/categories', 'admin_panel\categoriesController@index')->name('admin.categories');
@@ -54,10 +49,12 @@ Route::group(['middleware' => 'admin'], function(){
 
     Route::get('/admin_panel/categories/delete/{id}', 'admin_panel\categoriesController@delete')->name('admin.categories.delete');
     Route::post('/admin_panel/categories/delete/{id}', 'admin_panel\categoriesController@destroy');
-
+    Route::post('/admin_panel/categories/add/image', 'admin_panel\categoriesController@addImage')->name('admin.categories.add.image');
+    Route::get('/admin_panel/get_all_categories', 'admin_panel\categoriesController@getAllCategories');
 
     //products
     Route::get('/admin_panel/products', 'admin_panel\productsController@index')->name('admin.products');
+    Route::get('/admin_panel/get_all_products', 'admin_panel\productsController@getAllProducts');
 
     Route::get('/admin_panel/products/create', 'admin_panel\productsController@create')->name('admin.products.create');
     Route::post('/admin_panel/products/create', 'admin_panel\productsController@store');
@@ -78,6 +75,18 @@ Route::group(['middleware' => 'admin'], function(){
     //Market Settings
     Route::get('/admin_panel/market/settings', 'MarketSettings\MarketSettingsController@index')->name('admin.market.settings');
     Route::post('/admin_panel/market/settings', 'MarketSettings\MarketSettingsController@store')->name('admin.market.settings');
+    //Slides
+    Route::get('/admin_panel/slides', 'admin_panel\SlideController@index')->name('admin.slides');
+    Route::get('/admin_panel/get_all_slides', 'admin_panel\SlideController@getAllSlides');
+
+    Route::get('/admin_panel/slides/create', 'admin_panel\SlideController@create')->name('admin.slides.create');
+    Route::post('/admin_panel/slides/create', 'admin_panel\SlideController@store');
+
+    Route::get('/admin_panel/slides/edit/{id}', 'admin_panel\SlideController@edit')->name('admin.slides.edit');
+    Route::post('/admin_panel/slides/edit/{id}', 'admin_panel\SlideController@update');
+
+    // Route::get('/admin_panel/slides/delete/{id}', 'admin_panel\SlideController@delete')->name('admin.slides.delete');
+    Route::get('/admin_panel/slides/delete/{id}', 'admin_panel\SlideController@destroy');
 
 });
 
@@ -116,7 +125,9 @@ Route::get('/address/default/{id}', 'user\AddressController@editDefault')->name(
 Route::post('/address/default', 'user\AddressController@storeDefault')->name('address.default.update');
 Route::post('/address/delete/{id}', 'user\AddressController@delete')->name('address.delete');
 Route::post('/address', 'user\AddressController@store')->name('address.save');
-
+Route::get('/about-cookies', function(){
+return view('store2.cookies');
+})->name('about.cookies');
 Route::group(['middleware' => 'user'], function(){
 Route::get('/history', 'user\userController@history')->name('user.history');
 

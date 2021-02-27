@@ -1,12 +1,12 @@
 (function($) {
   'use strict';
   $(function() {
-    
+
     //Close other submenu in sidebar on opening any
 
-    sidebar.on('show.bs.collapse', '.collapse', function() {
-      sidebar.find('.collapse.show').collapse('hide');
-    });
+    // sidebar.on('show.bs.collapse', '.collapse', function() {
+    //   sidebar.find('.collapse.show').collapse('hide');
+    // });
 
 
     //Change sidebar and content-wrapper height
