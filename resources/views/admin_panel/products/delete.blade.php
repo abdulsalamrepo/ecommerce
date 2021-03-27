@@ -13,7 +13,7 @@
                                     <br>
                                     <h4 class="card-title">Edit product</h4>
                                     <br>
-                                    <img id="imageHolder" src="../../../uploads/products/{{$product->id}}/{{$product->image_name}}" alt="add image" height="300" width="300"
+                                    <img id="imageHolder" src="{{asset($product->image_name)}}" alt="add image" height="300" width="300"
                                     />
                                     <form class="forms-sample" method="post" enctype="multipart/form-data">
                                         {{csrf_field()}}
@@ -40,16 +40,16 @@
                                             <label >Product Discounted Price</label>
                                             <input type="text" class="form-control"  name="Discounted_Price" value="{{$product->discount}}" disabled>
                                         </div>
-                                        
+
                                         <div class="form-group ">
                                             <label >Product Colors</label>
                                             <br>
-                                            <div id="colors" style="border:1px solid #eee"> 
-                                            </div>  
-                                            <br>            
+                                            <div id="colors" style="border:1px solid #eee">
+                                            </div>
+                                            <br>
                                             <input type="text" class="form-control" id="color_list" name="Colors" value="{{$product->colors}}" hidden>
                                         </div>
-                                        
+
                                         <div class="form-group">
                                             <label >Product Tags</label>
                                             <input type="text" class="form-control" id="exampleInputEmail1" name="Tags" value="{{$product->tag}}" disabled>
@@ -103,7 +103,7 @@ $( document ).ready(function() {
     var arrayOfSize = sizeList.split(",");
     document.querySelector("#sizes").innerHTML = sizeComponent(arrayOfSize);
     //console.log(addedColor);
-    onReadyColorList(arrayOfColor);       
+    onReadyColorList(arrayOfColor);
 });
 function onReadyColorList(arrayOfColor){
     var addedColor = document.querySelector("#color_list").value;
@@ -118,22 +118,22 @@ function addColor(){
     newColor = `<div style="height:25px;display:inline-block;margin:5px;width:25px!important;background-color:${pickedColor}"></div>`;
     var addedColor = document.querySelector("#color_list").value;
     //console.log(addedColor);
-    if (addColor != null){  
+    if (addColor != null){
         var arrayOfColor = addedColor.split(',');
         if(!arrayOfColor.includes(pickedColor)){
             arrayOfColor.push(pickedColor);
             document.querySelector("#color_list").value = arrayOfColor.join(',');
             document.querySelector("#colors").innerHTML += newColor;
         }
-        
+
         console.log(addedColor);
-       
-        
-    } 
+
+
+    }
 }
 function sizeComponent(arrayOfSize){
     var s = ``;
-    
+
     for(var i = 0 ; i < arrayOfSize.length; i ++){
         //alert(1);
         var temp = `<span style="border:2px solid #eee;padding:5px 5px;margin:4px">${arrayOfSize[i]}</span>`;

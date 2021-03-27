@@ -28,6 +28,7 @@ class CreateMarketSettingsTable extends Migration
             $table->string('google');
             $table->string('whatsapp');
             $table->string('instagram');
+
             $table->timestamps();
         });
     }

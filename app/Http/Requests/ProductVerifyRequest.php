@@ -24,25 +24,24 @@ class ProductVerifyRequest extends FormRequest
     public function rules()
     {
         return [
-            
+
             'Name' => 'required|max:50',
             'Description' => 'required',
             'Price' => 'required|numeric',
             'Discounted_Price' => 'required|numeric',
-            
             'Colors' => 'required',
             'Tags' => 'required'
 
 
-            
+
         ];
     }
-    
+
     public function messages()
     {
         return [
-            
-            
+
+
         ];
     }
 }

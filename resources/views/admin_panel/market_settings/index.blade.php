@@ -130,6 +130,30 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label">Add price to all products</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="add_all_price" value="{{$ms->add_all_price}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label">shipping for 100g</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="shipping" value="{{$ms->shipping}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label">Fees</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="fees" value="{{$ms->fees}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label">Dollar To Krone</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="tel" value="{{$ms->dollar_to_krone}}">
+                </div>
+            </div>
+            <div class="form-group">
                 <div class="col-md-12 col-12 d-inline-block">
                             <div  class="photos-wrapper d-flex" style="width: 40%">
                             <a  id="uploadPhotoBtn" href="javascript:void(0)" onclick="document.getElementById('my_file').click();">

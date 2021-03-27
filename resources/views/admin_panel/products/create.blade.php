@@ -8,7 +8,8 @@
   background-color: #f2dede;
   border-color: #ebccd1;
   padding:1px 20px 1px 20px;
-}</style>
+}
+</style>
 <div class="content-wrapper">
     <div class="row">
         <div class="col-md-12 d-flex align-items-stretch grid-margin">
@@ -43,10 +44,9 @@
                                                         </a>
                                                         <img id="imageHolder" src=""  width="100px" height="100px">
                                                     </div>
-                                                <input type="file" name="inp_files" accept="image/*" id="inp_files" multiple="multiple" class="form-control d-none"></div>
+                                                <input type="file"   id="inp_files"  class="form-control d-none"></div>
                                             </div>
-
-                                        <input id="inp_img" name="img" type="hidden" value="">
+                                        <input id="img_hidden" name="img" type="hidden" value="">
                                         <br><br>
                                         <div id="for_extension_error"></div>
                                         <div class="form-group">
@@ -61,22 +61,25 @@
                                             <label  for="Category">Category*</label>
                                             <select class="form-control form-control-md" id="Category" name="Category">
                                                 @php foreach($catlist->all() as $cat) {
-                                                echo "<option value=".$cat->id." >".$cat->name." </option>"; $select_attribute=''; } @endphp
+                                                echo "<option value=".$cat->id." >".$cat->name." </option>"; $select_attribute=''; }
+                                                @endphp
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label  >Product Price*</label>
-                                            <input type="text" class="form-control" name="Price" id="Price" value="">
+                                            <input type="number" min="0" class="form-control" name="Price" id="Price" value="">
                                         </div>
                                         <div class="form-group">
                                             <label  >Product Discounted Price*</label>
-                                            <input type="text" class="form-control" id="Discounted_Price"  name="Discounted_Price" value="">
+                                            <input type="number" min="0" class="form-control" id="Discounted_Price"  name="Discounted_Price" value="">
                                         </div>
-
+                                        <div class="form-group">
+                                            <label  >Product Weight*</label>
+                                            <input type="number" min="0" class="form-control" id="weight"  name="weight" value="">
+                                        </div>
                                         <div class="form-group ">
                                             <label  >Product Colors*</label>
-
-                                            <input type="color" id="picker" class="form-control col-md-2">
+                                            <input type="color" id="picker" class="form-control col-md-2" style="height: 50px;">
                                             <br>
                                             <a onclick="addColor()" class="btn btn-sm btn-primary" >add</a>
                                             <br>
@@ -116,126 +119,54 @@
 </div>
 
 <script>
-
-  function fileChange(e) {
-
-     document.getElementById('inp_img').value = '';
-
-     for (var i = 0; i < e.target.files.length; i++) {
-
-        var file = e.target.files[i];
-
-        if (file.type == "image/jpeg" || file.type == "image/png") {
-
-           var reader = new FileReader();
-           reader.onload = function(readerEvent) {
-
-              var image = new Image();
-              image.onload = function(imageEvent) {
-
-                 var max_size = 600;
-                 var w = image.width;
-                 var h = image.height;
-
-                 if (w > h) {  if (w > max_size) { h*=max_size/w; w=max_size; }
-                 } else     {  if (h > max_size) { w*=max_size/h; h=max_size; } }
-
-                 var canvas = document.createElement('canvas');
-                 canvas.width = w;
-                 canvas.height = h;
-                 canvas.getContext('2d').drawImage(image, 0, 0, w, h);
-                 if (file.type == "image/jpeg") {
-                    var dataURL = canvas.toDataURL("image/jpeg", 1.0);
-                 } else {
-                    var dataURL = canvas.toDataURL("image/png");
-                 }
-                 document.getElementById('inp_img').value += dataURL + '|';
-                 console.log(document.getElementById('inp_img').value)
-              }
-              image.src = readerEvent.target.result;
-
-           }
-           reader.readAsDataURL(file);
-
-            readURL(this);
-
-        } else {
-           document.getElementById('inp_files').value = '';
-           alert('Please only select images in JPG or PNG format.');
-           return false;
-        }
-     }
-
-  }
-
-  document.getElementById('inp_files').addEventListener('change', fileChange, false);
-
-</script>
-
-<script>
+    function fileChange(e) {
+        readURL(this);
+    }
+    document.getElementById('inp_files').addEventListener('change', fileChange, false);
     function readURL(input) {
-
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-
             reader.onload = function (e) {
                 $('#imageHolder').attr('src', e.target.result);
+                $('#img_hidden').val(e.target.result);
             }
-
             reader.readAsDataURL(input.files[0]);
         }
     }
 
-
-
-
-function onReadyColorList(arrayOfColor){
-    var addedColor = document.querySelector("#color_list").value;
-    var arrayOfColor = addedColor.split(',');
-    for(var i =0 ; i< arrayOfColor.length; i++){
-        newColor = `<div style="height:25px;display:inline-block;margin:5px;width:25px!important;background-color:${arrayOfColor[i]}"></div>`;
-        document.querySelector("#colors").innerHTML += newColor;
-    }
-}
-
-function addColor(){
-    var pickedColor = document.querySelector("#picker").value;
-    newColor = `<div style="height:25px;display:inline-block;margin:5px;width:25px!important;background-color:${pickedColor}"></div>`;
-    var addedColor = document.querySelector("#color_list").value;
-    var arrayOfColor = [];
-    if (addedColor != ""){
-        arrayOfColor = addedColor.split(',');
-        if(!arrayOfColor.includes(pickedColor)){
-            arrayOfColor.push(pickedColor);
-            document.querySelector("#color_list").value = arrayOfColor.join(',');
+    function onReadyColorList(arrayOfColor){
+        var addedColor = document.querySelector("#color_list").value;
+        var arrayOfColor = addedColor.split(',');
+        for(var i =0 ; i< arrayOfColor.length; i++){
+            newColor = `<div style="height:25px;display:inline-block;margin:5px;width:25px!important;background-color:${arrayOfColor[i]}"></div>`;
             document.querySelector("#colors").innerHTML += newColor;
         }
     }
-    else{
-        arrayOfColor.push(pickedColor);
-        document.querySelector("#colors").innerHTML += newColor;
-        document.querySelector("#color_list").value = pickedColor;
+
+    function addColor(){
+        var pickedColor = document.querySelector("#picker").value;
+        newColor = `<div style="height:25px;display:inline-block;margin:5px;width:25px!important;background-color:${pickedColor}"></div>`;
+        var addedColor = document.querySelector("#color_list").value;
+        var arrayOfColor = [];
+        if (addedColor != ""){
+            arrayOfColor = addedColor.split(',');
+            if(!arrayOfColor.includes(pickedColor)){
+                arrayOfColor.push(pickedColor);
+                document.querySelector("#color_list").value = arrayOfColor.join(',');
+                document.querySelector("#colors").innerHTML += newColor;
+            }
+        }
+        else{
+            arrayOfColor.push(pickedColor);
+            document.querySelector("#colors").innerHTML += newColor;
+            document.querySelector("#color_list").value = pickedColor;
+        }
     }
-       // console.log(addedColor);
-}
-
-
-</script>
-
-
-<!--JQUERY Validation-->
-<script>
 
 	$(document).ready(function() {
-
-
-
 		$("#product_form").validate({
-
 			rules: {
-
                 Name: "required",
-                inp_files: "required",
 
                 Description: "required",
                 Category: "required",
@@ -249,20 +180,12 @@ function addColor(){
 				},
                 colors: "required",
                 Tags: "required"
-
-
-
-
-
-
 			},
 			messages: {
-
 				Name: "No Name is Entered",
-                inp_files:  "ERRRERRR",
+
                 Description: "No Description is Entered",
                 Category: "No Category is Selected",
-
 				Price: {
 					required: "No Price is Entered",
 					number: "Invalid Price"
@@ -273,22 +196,9 @@ function addColor(){
 				},
                 colors: "No Color is Selected",
                 Tags: "No Tags is Selected",
-
-
 			}
-
-
-
 		});
-
-
-
-
 	});
-
-
-
-
 	</script>
 <!--/JQUERY Validation-->
 @endsection

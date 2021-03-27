@@ -41,7 +41,7 @@
                                 <ul class="breadcrumb__list">
                                     <li class="has-separator">
 
-                                        <a href="index.html">Home</a></li>
+                                        <a href="{{route('user.home')}}">Home</a></li>
                                     <li class="is-marked">
 
                                         <a href="signup.html">Signup</a></li>
@@ -113,7 +113,7 @@
                                                     <span class="gl-label">BIRTHDAY</span>
                                                     <div class="gl-dob">
                                                         <select id="selectMonth" onchange="changeMonth(this)" name="month" class="select-box select-box--primary-style">
-                                                            <option selected>Month</option>
+                                                            <option value="" selected>Month</option>
                                                             <option value="1">January</option>
                                                             <option value="2">February</option>
                                                             <option value="3">March</option>
@@ -129,11 +129,11 @@
                                                         </select>
 
                                                         <select id="selectDay" name="day" class="select-box select-box--primary-style">
-                                                            <option selected>Day</option>
+                                                            <option value="" selected>Day</option>
 
                                                         </select>
                                                         <select onchange="selectYeara(this)" name="year" id="selectYear" class="select-box select-box--primary-style">
-                                                            <option selected>Year</option>
+                                                            <option value="" selected>Year</option>
 
                                                         </select>
 
@@ -143,7 +143,7 @@
                                                 <div class="u-s-m-b-30">
                                                     <label class="gl-label" for="gender">GENDER</label>
                                                     <select class="select-box select-box--primary-style u-w-100" id="gender" name="gender">
-                                                        <option selected>Select</option>
+                                                        <option value="" selected>Select</option>
                                                         <option value="male">Male</option>
                                                         <option value="female">Female</option>
                                                     </select>
@@ -152,25 +152,12 @@
                                         <div class="gl-inline">
                                             <div class="u-s-m-b-15">
                                                 <label class="gl-label" for="reg-email">ADDRESS *</label>
-                                                <input class="input-text input-text--primary-style" type="text" name="address" id="address" placeholder="Address">
+                                                <textarea class="input-text input-text--primary-style" name="address" id="address" placeholder="Address" style="padding: 11px;" cols="10" rows="10"></textarea>
                                              {!! $errors->first('address', '<label class="error">:message</label>') !!}
-
-                                            </div>
-                                             <div class="u-s-m-b-15">
-                                                <label class="gl-label" for="reg-email">CITY *</label>
-                                                <input class="input-text input-text--primary-style" type="text" name="city" id="city" placeholder="City">
-                                             {!! $errors->first('city', '<label class="error">:message</label>') !!}
 
                                             </div>
                                         </div>
                                         <div class="gl-inline">
-
-                                             <div class="u-s-m-b-15">
-                                                <label class="gl-label" for="reg-email">ZIP *</label>
-                                                <input class="input-text input-text--primary-style" type="text" name="zip" id="zip" placeholder="ZIP Code">
-                                             {!! $errors->first('zip', '<label class="error">:message</label>') !!}
-                                            </div>
-
                                              <div class="u-s-m-b-15">
                                                 <label class="gl-label" for="reg-email">TEL *</label>
                                                 <input class="input-text input-text--primary-style" type="tel" name="tel" id="tel" placeholder="Telephone">

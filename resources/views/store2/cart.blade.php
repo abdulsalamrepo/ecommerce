@@ -14,7 +14,7 @@
                         <ul class="breadcrumb__list">
                             <li class="has-separator">
 
-                                <a href="index.html">Home</a></li>
+                                <a href="{{route('user.home')}}">Home</a></li>
                             <li class="is-marked">
 
                                 <a href="cart.html">Cart</a></li>

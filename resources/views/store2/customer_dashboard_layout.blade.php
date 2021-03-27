@@ -1,7 +1,11 @@
 @extends('store2.layout_master')
+@section('head')
+@yield('headc')
+@endsection
 @section('content')
 <div class="app-content">
-
+    @include('includes.errors')
+    @include('includes.success')
     <!--====== Section 1 ======-->
     <div class="u-s-p-y-60">
 
@@ -13,7 +17,7 @@
                         <ul class="breadcrumb__list">
                             <li class="has-separator">
 
-                                <a href="index.html">Home</a></li>
+                                <a href="{{route('user.home')}}">Home</a></li>
                             <li class="is-marked">
 
                                 <a href="dashboard.html">My Account</a></li>
@@ -40,29 +44,29 @@
                             <div class="dash__box dash__box--bg-white dash__box--shadow u-s-m-b-30">
                                 <div class="dash__pad-1">
 
-                                    <span class="dash__text u-s-m-b-16">Hello, John Doe</span>
+                                    <span class="dash__text u-s-m-b-16">Hello, {{$user->first_name . ' ' . $user->last_name}}</span>
                                     <ul class="dash__f-list">
                                         <li>
 
-                                            <a class="dash-active" href="dashboard.html">Manage My Account</a></li>
+                                            <a class="dash-active" href="{{route('dashboard.user.dashboard')}}">Manage My Account</a></li>
                                         <li>
 
-                                            <a href="dash-my-profile.html">My Profile</a></li>
+                                            <a href="{{route('dashboard.user.profile')}}">My Profile</a></li>
                                         <li>
 
-                                            <a href="dash-address-book.html">Address Book</a></li>
+                                            <a href="{{route('dashboard.user.address')}}">Address Book</a></li>
+                                        {{-- <li>
+
+                                            <a href="dash-track-order.html">Track Order</a></li> --}}
                                         <li>
 
-                                            <a href="dash-track-order.html">Track Order</a></li>
-                                        <li>
+                                            <a href="{{route('dashboard.my.order')}}">My Orders</a></li>
+                                        {{-- <li>
 
-                                            <a href="dash-my-order.html">My Orders</a></li>
-                                        <li>
+                                            <a href="dash-payment-option.html">My Payment Options</a></li> --}}
+                                        {{-- <li>
 
-                                            <a href="dash-payment-option.html">My Payment Options</a></li>
-                                        <li>
-
-                                            <a href="dash-cancellation.html">My Returns &amp; Cancellations</a></li>
+                                            <a href="dash-cancellation.html">My Returns &amp; Cancellations</a></li> --}}
                                     </ul>
                                 </div>
                             </div>

@@ -21,13 +21,12 @@ class userController extends Controller
         $slides=Slide::where('view',1)->get();
     	return view('store2.index_s')
             ->with('products', $res)
-            ->with("cat", $cat)
+            ->with("categories", $cat)
             ->with('index', 1)
             ->with('slides', $slides);
     }
     public function view($id)
     {
-
         $res = Product::find($id);
         $res1 = Product::all();
         $cat=Category::find($res->category_id);
@@ -112,7 +111,7 @@ class userController extends Controller
         $cat = Category::all();
         if(!Session::has('cart'))
         {
-            return view('store.cart')->with('all',null)
+            return view('store2.cart')->with('all',null)
             ->with('products',[])
             ->with('products', $res)
             ->with("cat", $cat);
@@ -134,7 +133,7 @@ class userController extends Controller
             Session::put('price',$cost);
         }
 
-    	return view('store.cart')
+    	return view('store2.cart')
             ->with('products', $res)
             ->with("cat", $cat)
             ->with('all',$cart)
@@ -217,107 +216,126 @@ class userController extends Controller
     }
 //    for quntity control in cart ENDS
 
-    public function deleteCartItem(Request $r)
+    public function deleteCartItem($id)
     {
+        // $counter=0;
+        // $newtotalCart = explode(',',Session::get('cart'));
+        // //dd(Session::get('cart'));
+        // foreach($newtotalCart as $c)
+        // {
+        //     $newcart[]=explode(':',$c);
+        // }
+        // foreach($newcart as $t)
+        // {
+        //         if($t[3]==$r->serial)
+        //         {
+        //             $another_counter=$counter;
+        //         }
+        //         $counter++;
+        // }
+        // array_splice($newtotalCart, $another_counter, 1);
+
+        // //testing Starts
+        // //dd(Session::get('tempCart'));
+        //  foreach($newtotalCart as $c2)
+        // {
+
+        //     $newcart2[]=explode(':',$c2);
+        // }
+
+        // if($newtotalCart==null)
+        // {
+        //     Session::forget('cart');
+        //     Session::forget('price');
+        //     Session::forget('orderCounter');
+        //     return json_encode("Empty");
+        //     exit;
+
+        // }
+
+        // else
+        // {
+        //     foreach($newcart2 as $t2)
+        // {
+
+        //         if(!(Session::has('tempCart')))
+        //         {
+
+        //             $str2=$t2[0].":".$t2[1].":".$t2[2].":".$t2[3];
+        //             Session::put('tempCart',$str2);
 
 
-        $counter=0;
-        $newtotalCart = explode(',',Session::get('cart'));
-        //dd(Session::get('cart'));
-        foreach($newtotalCart as $c)
+        //         }
+        //         else
+        //         {
+        //             $str2=$t2[0].":".$t2[1].":".$t2[2].":".$t2[3];
+        //             $mytotal2=Session::get('tempCart').",".$str2;
+        //             Session::put('tempCart',$mytotal2);
+        //         }
+
+        // }
+
+        //     Session::forget('cart');
+        //     Session::put('cart',Session::get('tempCart'));
+        //     Session::forget('tempCart');
+
+        //     //for price update
+        //     $res = Product::all();
+        //     $cat = Category::all();
+        //     $cart=[];
+        //     $product=[];
+        //     $cost=0;
+        //     $cost_after_quantity=0;
+        //     Session::forget('price');
+        //     $totalCart = explode(',',Session::get('cart'));
+        //     //dd(Session::get('cart'));
+        //     foreach($totalCart as $c)
+        //     {
+        //         $cart[]=explode(':',$c);
+        //         $a=explode(':',$c);
+        //         $res = Product::find($a[0]);
+        //         $product[]=$res;
+        //         $cost_after_quantity=$a[1]*$res->discount;
+        //         $cost+= $cost_after_quantity;
+        //         Session::put('price',$cost);
+
+        //     }
+        //     $szn[0]=Session::get('cart');
+        //     $szn[1]=Session::get('price');
+        //     $szn[2]=$cost;
+        //     $szn[3]=$r->serial;
+        //     return json_encode($szn);
+        //     exit;
+        // }
+
+        if(Session::has('user'))
         {
-            $newcart[]=explode(':',$c);
+            $sale=sale::where('product_id',$id)->delete();
+            return back();
         }
-        foreach($newcart as $t)
-        {
-                if($t[3]==$r->serial)
-                {
-                    $another_counter=$counter;
-                }
-                $counter++;
-        }
-        array_splice($newtotalCart, $another_counter, 1);
-
-        //testing Starts
-        //dd(Session::get('tempCart'));
-         foreach($newtotalCart as $c2)
-        {
-
-            $newcart2[]=explode(':',$c2);
-        }
-
-        if($newtotalCart==null)
-        {
-            Session::forget('cart');
-            Session::forget('price');
-            Session::forget('orderCounter');
-            return json_encode("Empty");
-            exit;
-
-        }
-
         else
         {
-            foreach($newcart2 as $t2)
-        {
-
-                if(!(Session::has('tempCart')))
-                {
-
-                    $str2=$t2[0].":".$t2[1].":".$t2[2].":".$t2[3];
-                    Session::put('tempCart',$str2);
-
-
-                }
-                else
-                {
-                    $str2=$t2[0].":".$t2[1].":".$t2[2].":".$t2[3];
-                    $mytotal2=Session::get('tempCart').",".$str2;
-                    Session::put('tempCart',$mytotal2);
-                }
-
+            \abort(500);
         }
 
-            Session::forget('cart');
-            Session::put('cart',Session::get('tempCart'));
-            Session::forget('tempCart');
-
-            //for price update
-            $res = Product::all();
-            $cat = Category::all();
-            $cart=[];
-            $product=[];
-            $cost=0;
-            $cost_after_quantity=0;
-            Session::forget('price');
-            $totalCart = explode(',',Session::get('cart'));
-            //dd(Session::get('cart'));
-            foreach($totalCart as $c)
-            {
-                $cart[]=explode(':',$c);
-                $a=explode(':',$c);
-                $res = Product::find($a[0]);
-                $product[]=$res;
-                $cost_after_quantity=$a[1]*$res->discount;
-                $cost+= $cost_after_quantity;
-                Session::put('price',$cost);
-
-            }
-            $szn[0]=Session::get('cart');
-            $szn[1]=Session::get('price');
-            $szn[2]=$cost;
-            $szn[3]=$r->serial;
-            return json_encode($szn);
-            exit;
-        }
-
-
-
-
-
-        //testing ends
     }
 
+    public function addToCart(Request $request)
+    {
+        if(Session::has('user'))
+        {
+            $product=Product::find($request->id);
+            $sales= new sale();
+            $sales->user_id=session('user')->id;
+            $sales->product_id=$product->id;
+            $sales->address_id=Address::where([['user_id',session('user')->id],['default',1]])->first()->id;
+            $sales->order_status='Placed';
+            $sales->price=$product->discount;
+            $sales->quantity=$request->quantity;
+            $sales->save();
+            return response()->json();
+        }
+    }
 
     public function confirm(Request $r)
     {
@@ -331,7 +349,6 @@ class userController extends Controller
                 $sales->product_id=session('cart');
                 $sales->order_status='Placed';
                 $sales->price=session('price');
-
                 $sales->save();
            // dd(1);
             Session::forget('cart');
@@ -360,9 +377,8 @@ class userController extends Controller
             //dd($validatedData);
             $u=new User();
             $add=new Address();
-            $add->area=$r->address;
-            $add->city=$r->city;
-            $add->zip=$r->zip;
+            $add->address=$r->address;
+            $add->phone_number=$r->tel;
             $add->save();
             $add_id=$add->id;
             $u->full_name=$r->name;

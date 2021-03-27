@@ -24,6 +24,10 @@ class MarketSetting extends Model
 'whatsapp',
 'google',
 'instagram',
-'youtube'
+'youtube',
+'add_all_price',
+'shipping',
+'fees',
+'dollar_to_krone'
 ];
 }

@@ -93,7 +93,7 @@ $(document).ready(function() {
             {
                  sortable: false,
                  "render": function ( data, type, full, meta ) {
-                     return `<img src="../uploads/products/${full.id}/${full.image_name}" style="width:100px;height:100px;border-radius:10%;" alt="">`;
+                     return `<img src="/${full.image_name}" style="width:100px;height:100px;border-radius:10%;" alt="">`;
                  }
              },
             {

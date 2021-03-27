@@ -17,9 +17,9 @@ class CreateSalesTable extends Migration
             $table->engine = 'MyISAM';
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')
-                ->references('id')->on('users')
-                ->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('address_id')->unsigned();
+            $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
             $table->text('product_id');
             $table->text('order_status');
             $table->bigInteger('price');

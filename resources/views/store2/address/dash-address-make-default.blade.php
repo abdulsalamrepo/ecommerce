@@ -8,63 +8,54 @@
                 <table class="dash__table-2">
                     <thead>
                         <tr>
-                            <th>Action</th>
-                            <th>Full Name</th>
+                            <th></th>
                             <th>Address</th>
-                            <th>Region</th>
                             <th>Phone Number</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($addresses as $address)
                         <tr>
+                            @if ($address->default)
                             <td>
-
-                                <!--====== Radio Box ======-->
                                 <div class="radio-box">
-
-                                    <input type="radio" id="address-1" name="default-address" checked="">
+                                    <input type="radio" id="address-1" name="default-address" checked>
                                     <div class="radio-box__state radio-box__state--primary">
-
-                                        <label class="radio-box__label" for="address-1"></label></div>
+                                        <label class="radio-box__label" for="address-1"></label>
+                                    </div>
                                 </div>
-                                <!--====== End - Radio Box ======-->
                             </td>
-                            <td>John Doe</td>
-                            <td>4247 Ashford Drive Virginia VA-20006 USA</td>
-                            <td>Virginia VA-20006 USA</td>
-                            <td>(+0) 900901904</td>
+                            @else
                             <td>
-                                <div class="gl-text">Default Shipping Address</div>
-                                <div class="gl-text">Default Billing Address</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-
-                                <!--====== Radio Box ======-->
                                 <div class="radio-box">
-
-                                    <input type="radio" id="address-2" name="default-address">
+                                    <input type="radio" id="address-1" name="default-address" >
                                     <div class="radio-box__state radio-box__state--primary">
-
-                                        <label class="radio-box__label" for="address-2"></label></div>
+                                        <label class="radio-box__label" for="address-1"></label>
+                                    </div>
                                 </div>
-                                <!--====== End - Radio Box ======-->
                             </td>
-                            <td>Doe John</td>
-                            <td>1484 Abner Road</td>
-                            <td>Eau Claire WI - Wisconsin</td>
-                            <td>(+0) 7154419563</td>
-                            <td></td>
+                            @endif
+
+                            <td>{{$address->address}}</td>
+                            <td>{{$address->phone_number}}</td>
+                            @if ($address->default)
+                                <td>
+                                    <div class="gl-text">Default Shipping Address</div>
+                                </td>
+                            @else
+                                <td></td>
+                            @endif
+
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
         <div>
 
-            <button class="btn btn--e-brand-b-2" type="submit">SAVE</button></div>
+            <button class="btn btn--e-brand-b-2" type="button" id="saveDefaultBtn">SAVE</button></div>
     </form>
 </div>
 @endsection

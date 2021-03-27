@@ -339,7 +339,6 @@
         }
 
     };
-
     // Input Counter
     RESHOP.initInputCounter = function() {
         // Check if Input Counters on the page
@@ -348,12 +347,14 @@
             $collectionInputCounter.find('.input-counter__plus').on('click',function () {
                 var $input = $(this).parent().find('input');
                 var count = parseInt($input.val()) + 1; // Number + Number
+                // $input.val(count).change();
                 $input.val(count).change();
             });
             // Attach Click event to minus button
             $collectionInputCounter.find('.input-counter__minus').on('click',function () {
                 var $input = $(this).parent().find('input');
                 var count = parseInt($input.val()) - 1; // Number - Number
+                // $input.val(count).change();
                 $input.val(count).change();
             });
             // Fires when the value of the element is changed
@@ -632,19 +633,19 @@
         }
     };
 
-    // Show Newsletter Modal
-    RESHOP.showNewsletterModal = function() {
-        if ($('#newsletter-modal').length) {
-            setTimeout(function () {
-                // Manually opens a modal
-                $('#newsletter-modal').modal({
-                    backdrop: 'static',
-                    keyboard: false,
-                    show: true
-                });
-            }, 5000);
-        }
-    };
+    // // Show Newsletter Modal
+    // RESHOP.showNewsletterModal = function() {
+    //     if ($('#newsletter-modal').length) {
+    //         setTimeout(function () {
+    //             // Manually opens a modal
+    //             $('#newsletter-modal').modal({
+    //                 backdrop: 'static',
+    //                 keyboard: false,
+    //                 show: true
+    //             });
+    //         }, 5000);
+    //     }
+    // };
 
     // Check everything including DOM elements and images loaded
     $(window).on('load',function () {

@@ -1,7 +1,9 @@
 <?php
 
+use App\sale;
 use App\Category;
 use App\MarketSetting;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,19 +27,57 @@ View::composer('*', function ($view) {
         foreach ($cat as $key => $c) {
             $c->images;
         }
-        $view->with(compact('icons','iconsf','ms','cat'));
-    // }
+        if(Session::has('user'))
+        {
+            $sales=sale::selectRaw('product_id,max(price) as price , sum(quantity) as quantity')
+            ->where('user_id',session()->get('user')->id)
+            ->groupBy('product_id')
+            ->get();
+            foreach ($sales as $key => $sale) {
+                $sale->product;
+                $sale->product->category;
+                $sale['total']=$sale->price*$sale->quantity;
+            }
+            $user=session()->get('user');
+        }
+        else
+        {
+            $sales=null;
+            $user=null;
+        }
+        $view->with(compact('icons','iconsf','ms','cat','sales','user'));
+
 });
 
-//Dashboard
-//login
 Route::get('hik', function () {
-    return view('store2.search');
+    return view('store2.address.dash-address-book');
+    // Cookie::queue('user', $admin, 365*24*60);
+    // return Cookie::get('user');
+    return response()->json($request->cookie('acceptCookies'), 200);
 });
 
+//login
 Route::get('admin', 'loginController@adminIndex')->name('admin.login');
 Route::post('admin', 'loginController@adminPosted');
+Route::group(['prefix' => 'dashboard','middleware' => 'user' , 'as' => 'dashboard.'], function(){
+    Route::get('/', 'UserDashboardController@index')->name('user.dashboard');
+    Route::get('/profile', 'UserDashboardController@profile')->name('user.profile');
+    Route::get ('/edit/profile', 'UserDashboardController@editProfile')->name('edit.profile');
+    Route::post('/edit/profile', 'UserDashboardController@storeProfile');
+    Route::get('/address', 'user\AddressController@index')->name('user.address');
+    Route::get('/address/default', 'user\AddressController@getDefault')->name('user.address.default');
+    Route::get('/address/create', 'user\AddressController@create')->name('user.address.create');
+    Route::post('/address/create', 'user\AddressController@add');
+    Route::post('/address/store', 'user\AddressController@store')->name('user.address.store');
+    Route::get('/address/edit/{id}', 'user\AddressController@edit')->name('user.address.edit');
+    Route::get('/my/order', 'UserDashboardController@myOrders')->name('my.order');
+    Route::get('/manage/order/{id}', 'UserDashboardController@myOrder')->name('manage.order');
+    Route::get ('/user/change/password','UserDashboardController@getFormChangePassword')->name('users.form.change.password');
+    Route::post('/user/change/password','UserDashboardController@password');
+});
+
 Route::group(['middleware' => 'admin'], function(){
+    //Dashboard
     Route::get("/admin_panel", 'admin_panel\dashboardController@index')->name('admin.dashboard');
     Route::get('admin/logout', 'loginController@adminLogout')->name('admin.logout');
     //categories
@@ -78,14 +118,10 @@ Route::group(['middleware' => 'admin'], function(){
     //Slides
     Route::get('/admin_panel/slides', 'admin_panel\SlideController@index')->name('admin.slides');
     Route::get('/admin_panel/get_all_slides', 'admin_panel\SlideController@getAllSlides');
-
     Route::get('/admin_panel/slides/create', 'admin_panel\SlideController@create')->name('admin.slides.create');
     Route::post('/admin_panel/slides/create', 'admin_panel\SlideController@store');
-
     Route::get('/admin_panel/slides/edit/{id}', 'admin_panel\SlideController@edit')->name('admin.slides.edit');
     Route::post('/admin_panel/slides/edit/{id}', 'admin_panel\SlideController@update');
-
-    // Route::get('/admin_panel/slides/delete/{id}', 'admin_panel\SlideController@delete')->name('admin.slides.delete');
     Route::get('/admin_panel/slides/delete/{id}', 'admin_panel\SlideController@destroy');
 
 });
@@ -113,9 +149,12 @@ Route::post('/view/{id}', 'user\userController@post');
 
 Route::get('/cart', 'user\userController@cart')->name('user.cart');
 Route::post('/cart', 'user\userController@confirm');
+Route::post('/add-cart', 'user\userController@addToCart')->name('user.addToCart');
+Route::post('/checkout-cart', 'user\userController@addToCart')->name('user.checkout');
 
 Route::post('/edit_cart', 'user\userController@editCart')->name('user.editCart');
-Route::post('/delete_item_from_cart', 'user\userController@deleteCartItem')->name('user.deleteCartItem');
+Route::get('/delete_item_from_cart/{id}', 'user\userController@deleteCartItem')->name('user.deleteCartItem');
+Route::get('/checkout', 'user\userController@viewCheckout')->name('user.checkout');
 
 
 Route::get('/logout', 'loginController@userLogout')->name('user.logout');

@@ -27,7 +27,7 @@ label.error {
             <div class="col-md-5 ">
                 <div id="product-main-img">
                     <div class="product-preview">
-                        <img src="../uploads/products/{{$product->id}}/{{$product->image_name}}" alt="">
+                        <img src="{{asset($product->image_name)}}" alt="">
                     </div>
                 </div>
             </div>
@@ -55,23 +55,23 @@ label.error {
                     <form method="post" id="order_form">
                     {{csrf_field()}}
                     <div class="product-options" >
-                        <input type="hidden" id="discount_price_holder" name="discount_price_holder" value={{$product->discount}}>
+z                        <input type="hidden" id="discount_price_holder" name="discount_price_holder" value={{$product->discount}}>
                         <label>
-                        
+
                         <div id="field1">Quantity
                         <button type="button" id="sub" class="sub">-</button>
                         <input type="number" id="quantity" name="quantity" value="1" min="1" max="100"  />
                         <button type="button" id="add" class="add">+</button>
                     </div>
-                        
+
                         </label>
-                        
-                        
+
+
                         @foreach($colors as $c)
                         <input type="radio" name="color"  value="{{$c}}">
                         <div style="height:25px;width:25px;margin:5px;display:inline-block;background-color: {{$c}}"></div>
                         @endforeach
-                          
+
                     </div>
                         <div id="for_error"></div>
 
@@ -96,16 +96,16 @@ label.error {
 
 <!--JQUERY Validation-->
 <script>
-	
+
     //////////////////////////////////////
     $(document).ready(function() {
-		
+
 		$("#order_form").validate({
-			
+
             submitHandler: function (form) {
             if($('input[name=color]:checked').val()==undefined)
             {
-                
+
             document.getElementById("for_error").innerHTML = "<label class='error' style=' '>Invalid Variation Input</label>";
 
             }
@@ -113,26 +113,26 @@ label.error {
                     {
                         return true;
                     }
-                
+
          }
 		});
 
-		
+
 	});
-	
+
     $('.add').click(function () {
-        
+
         $(this).prev().val(+$(this).prev().val() + 1);
-        
+
     });
     $('.sub').click(function () {
             if ($(this).next().val() > 1) {
             $(this).next().val(+$(this).next().val() - 1);
             }
     });
-    
-	
-   
+
+
+
 	</script>
 <!--/JQUERY Validation-->
 <!-- /SECTION -->

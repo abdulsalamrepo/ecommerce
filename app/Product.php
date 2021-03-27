@@ -22,7 +22,9 @@ class Product extends Model
         'material',
         'discount',
         'tag',
-        'category_id'
+        'category_id',
+        'delivered_at',
+        'weight'
     ];
 
     public function category()

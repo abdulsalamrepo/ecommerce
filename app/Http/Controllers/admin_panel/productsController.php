@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\admin_panel;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\ProductVerifyRequest;
-use App\Http\Requests\ProductEditVerifyRequest;
-
-use Illuminate\Support\Facades\DB;
 use App\Product;
 use App\Category;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\ProductVerifyRequest;
+use App\Http\Requests\ProductEditVerifyRequest;
 
 
 class productsController extends Controller
@@ -30,19 +32,32 @@ class productsController extends Controller
     public function store(ProductVerifyRequest $request)
     {
         try {
-            $img = explode('|', $request->img);
-            for ($i = 0; $i < count($img) - 1; $i++) {
-            if (strpos($img[$i], 'data:image/jpeg;base64,') === 0) {
-                $img[$i] = str_replace('data:image/jpeg;base64,', '', $img[$i]);
-                $ext = '.jpg';
+            // $img = explode('|', $request->img);
+            // for ($i = 0; $i < count($img) - 1; $i++) {
+            // if (strpos($img[$i], 'data:image/jpeg;base64,') === 0) {
+            //     $img[$i] = str_replace('data:image/jpeg;base64,', '', $img[$i]);
+            //     $ext = '.jpg';
+            // }
+            // if (strpos($img[$i], 'data:image/png;base64,') === 0) {
+            //     $img[$i] = str_replace('data:image/png;base64,', '', $img[$i]);
+            //     $ext = '.png';
+            // }
+
+            $extension = explode('/', mime_content_type($request->img))[1];
+            $allowedfileExtension = ['jpeg', 'jpg', 'png', 'gif'];
+            $check = in_array($extension, $allowedfileExtension);
+            $dir = 'products_images';
+            if (!file_exists($dir)) {
+                mkdir($dir, 0777);
             }
-            if (strpos($img[$i], 'data:image/png;base64,') === 0) {
-                $img[$i] = str_replace('data:image/png;base64,', '', $img[$i]);
-                $ext = '.png';
-            }
+            $path=$dir.'/'.Str::random(50).'.'.$extension;
+            // Storage::disk('test')->put($path, base64_decode($request->img));
+            $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->img));
+            file_put_contents($path, $data);
             $prd = new Product();
-            $prd->image_name = "1".$ext;
+            $prd->image_name = $path;
             $prd->name = $request->Name;
+            $prd->weight = $request->weight;
             $prd->description = $request->Description;
             $prd->category_id = $request->Category;
             $prd->price = $request->Price;
@@ -50,23 +65,22 @@ class productsController extends Controller
             $prd->colors = $request->Colors;
             $prd->tag = $request->Tags;
             $prd->save();
-            $img[$i] = str_replace(' ', '+', $img[$i]);
-            $data = base64_decode($img[$i]);
-            $temp_string='/uploads/products/'.$prd->id;
-            $temp_string2='uploads/products/'.$prd->id;
-            if (!file_exists(public_path().$temp_string)) {
-                mkdir( public_path().$temp_string, 0777, true);
-                $file = $temp_string2.'/1'.$ext;
-            if (file_put_contents($file, $data))
-            {
-                echo "<p>Image $i was saved as $file.</p>";
-            }
-            else
-            {
-                echo '<p>Image $i could not be saved.</p>';
-            }
-            }
-        }
+            // $img[$i] = str_replace(' ', '+', $img[$i]);
+            // $data = base64_decode($img[$i]);
+            // $temp_string='/uploads/products/'.$prd->id;
+            // if (!file_exists(public_path().$temp_string)) {
+            //     mkdir( public_path().$temp_string, 0777, true);
+            //     $file = $temp_string2.'/1'.$ext;
+            // if (file_put_contents($file, $data))
+            // {
+            //     echo "<p>Image $i was saved as $file.</p>";
+            // }
+            // else
+            // {
+            //     echo '<p>Image $i could not be saved.</p>';
+            // }
+            // }
+        // }
         return redirect()->route('admin.products');
         } catch (\Throwable $th) {
             dd($th->getMessage());
@@ -89,6 +103,7 @@ class productsController extends Controller
         $prdToUpdate->name = $request->Name;
         $prdToUpdate->description = $request->Description;
         $prdToUpdate->price = $request->Price;
+        $prdToUpdate->weight = $request->weight;
         $prdToUpdate->discount= $request->Discounted_Price;
         $prdToUpdate->category_id = $request->Category;
         $prdToUpdate->colors = $request->Colors;
@@ -97,39 +112,16 @@ class productsController extends Controller
         if($request->img!="")
         {
             $img = explode('|', $request->img);
-        for ($i = 0; $i < count($img) - 1; $i++)
-        {
-         if (strpos($img[$i], 'data:image/jpeg;base64,') === 0)
-         {
-            $img[$i] = str_replace('data:image/jpeg;base64,', '', $img[$i]);
-            $ext = '.jpg';
-         }
-         if (strpos($img[$i], 'data:image/png;base64,') === 0)
-         {
-            $img[$i] = str_replace('data:image/png;base64,', '', $img[$i]);
-            $ext = '.png';
-         }
-        $prdToUpdate->image_name = "1".$ext;
-        $prdToUpdate->save();
-         $img[$i] = str_replace(' ', '+', $img[$i]);
-         $data = base64_decode($img[$i]);
-        $temp_string2='uploads/products/'.$prdToUpdate->id;
-        $file = $temp_string2.'/1'.$ext;
+            $extension = explode('/', mime_content_type($img[0]))[1];
+            $path='products_images/'.Str::random(50).'.'.$extension;
+            // Storage::disk('test')->put($path, base64_decode($img[0]));
+            $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $img[0]));
 
-         if (file_put_contents($file, $data))
-         {
-            echo "<p>Image $i was saved as $file.</p>";
-         } else {
-            echo '<p>Image $i could not be saved.</p>';
-         }
-      }
-            return redirect()->route('admin.products');
+            file_put_contents($path, $data);
+            $prdToUpdate->image_name = $path;
         }
-        else
-        {
-            $prdToUpdate->save();
-            return redirect()->route('admin.products');
-        }
+        $prdToUpdate->save();
+        return redirect()->route('admin.products');
     }
 
     public function delete($id)

@@ -23,23 +23,60 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <link rel="shortcut icon" href="{{asset('favicon.png')}}" />
     <style>
+        select{
+    text-transform: uppercase;
+    text-indent: 0px;
+    text-align: start;
+    appearance: menulist;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 10px;
+    border-width: 1px;
+    border-style: solid;
+    color: gray;
+}
+input{
+    border-radius: 15px !important;
+    border: 1px #000 solid !important;
+    padding-left: 15px !important;
+}
+}
+::-webkit-scrollbar {
+    width: 15px;
+    height: 8px
+
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255,0);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #5e5e5e;
+    border-radius: 8px;
+    box-shadow: inset 4px 4px 4px hsla(0, 0%, 100%, .25), inset 4px 4px 4px rgba(0, 0, 0, .25)
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(20, 20, 20);
+  }
         td{
             white-space: normal !important;
         }
         .navbar.default-layout {
     font-family: "Poppins", sans-serif;
-    background: linear-gradient(
+    /* background: linear-gradient(
 150deg
-, #4a4a4a, #0a0a0a, #d21010, #0a0a0a, #4a4a4a);
+, #4a4a4a, #0a0a0a, #d21010, #0a0a0a, #4a4a4a); */
+background: url({{asset('store2/css/nav.jpeg')}});
+
     transition: background 0.25s ease;
     -webkit-transition: background 0.25s ease;
     -moz-transition: background 0.25s ease;
     -ms-transition: background 0.25s ease;
 }
 .sidebar {
-    background: linear-gradient(
+    /* background: linear-gradient(
 120deg
-, #0a0a0a, #d21010, #0a0a0a, #d21010);
+, #0a0a0a, #d21010, #0a0a0a, #d21010); */
+background: url({{asset('store2/css/sidebar-4.jpg')}});
 }
 .sidebar .nav:not(.sub-menu) > .nav-item:not(.nav-profile) > .nav-link {
     color: #fafbfc;
@@ -80,6 +117,22 @@ a#uploadPhotoBtn
     padding: 5px;
     font-size: 25px;
 }
+
+  ::-webkit-scrollbar {
+        width: 15px;
+        height: 8px
+    }
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255,0);
+    }
+  ::-webkit-scrollbar-thumb {
+    background: #5e5e5e;
+    border-radius: 8px;
+    box-shadow: inset 4px 4px 4px hsla(0, 0%, 100%, .25), inset 4px 4px 4px rgba(0, 0, 0, .25)
+    }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(20, 20, 20);
+    }
     </style>
     @yield('head')
 
@@ -219,8 +272,10 @@ a#uploadPhotoBtn
     <script src="{{asset('vendors/js/vendor.bundle.base.js')}}"></script>
     <script src="{{asset('vendors/js/vendor.bundle.addons.js')}}"></script>
     <!-- endinject -->
+
     <!-- Plugin js for this page-->
     <!-- End plugin js for this page-->
+    
     <!-- inject:js -->
     <script src="{{asset('js/off-canvas.js')}}"></script>
     <script src="{{asset('js/misc.js')}}"></script>

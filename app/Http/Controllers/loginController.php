@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\AdminLoginVerifyRequest;
-use App\Http\Requests\UserLoginVerifyRequest;
-
-use Illuminate\Support\Facades\DB;
-use App\Admin;
 use App\User;
+use App\Admin;
 use App\Product;
+
 use App\Category;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cookie;
+use App\Http\Requests\UserLoginVerifyRequest;
+use App\Http\Requests\AdminLoginVerifyRequest;
 
 
 class loginController extends Controller
@@ -40,43 +42,32 @@ class loginController extends Controller
                 //$request->session()->put('username', $request->Username);
                 return redirect()->route('admin.dashboard');
             }
-
             else if($request->Password!=$admin->password)
             {
                 $request->session()->flash('message', 'Invalid Password');
                 return view('admin_panel.adminLogin');
             }
         }
-
-
-
     }
 
     public function userIndex()
     {
         if(session()->has('user')){
-            return redirect()->route("user.cart");
+            return redirect()->route("user.home");
         }
-
         $res = Product::all();
         $cat = Category::all();
-
         return view('store2.login')
         ->with('products', $res)
         ->with("cat", $cat);
-
     }
 
     public function userPosted(UserLoginVerifyRequest $request)
     {
-        $user = User::where('email',$request->email)
-        ->where('password',$request->pass)
-        ->first();
-
-        if($user==null)
+        $user = User::where('email',$request->email)->first();
+        if(is_null($user) || !Hash::check($request->pass,$user->password) )
         {
             $request->session()->flash('message', 'Invalid User');
-
             return redirect()->route('user.login');
         }
         else

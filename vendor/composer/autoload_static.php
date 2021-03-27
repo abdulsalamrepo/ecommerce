@@ -34,6 +34,7 @@ class ComposerStaticInit75db2271cd698f90ae48f9043f3731e8
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
+        '17d016dc52a631c1e74d2eb8fdd57342' => __DIR__ . '/..' . '/laravel/helpers/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -498,7 +499,9 @@ class ComposerStaticInit75db2271cd698f90ae48f9043f3731e8
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\Icons\\IconController' => __DIR__ . '/../..' . '/app/Http/Controllers/Icons/IconController.php',
         'App\\Http\\Controllers\\MarketSettings\\MarketSettingsController' => __DIR__ . '/../..' . '/app/Http/Controllers/MarketSettings/MarketSettingsController.php',
+        'App\\Http\\Controllers\\UserDashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserDashboardController.php',
         'App\\Http\\Controllers\\admin_panel\\ExclusiveProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin_panel/ExclusiveProductController.php',
+        'App\\Http\\Controllers\\admin_panel\\SlideController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin_panel/SlideController.php',
         'App\\Http\\Controllers\\admin_panel\\categoriesController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin_panel/categoriesController.php',
         'App\\Http\\Controllers\\admin_panel\\dashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin_panel/dashboardController.php',
         'App\\Http\\Controllers\\admin_panel\\managementController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin_panel/managementController.php',
@@ -524,6 +527,7 @@ class ComposerStaticInit75db2271cd698f90ae48f9043f3731e8
         'App\\Http\\Requests\\CategoryEditVerifyRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CategoryEditVerifyRequest.php',
         'App\\Http\\Requests\\CategoryVerifyRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CategoryVerifyRequest.php',
         'App\\Http\\Requests\\MarketSettingRequest' => __DIR__ . '/../..' . '/app/Http/Requests/MarketSettingRequest.php',
+        'App\\Http\\Requests\\PasswordRequest' => __DIR__ . '/../..' . '/app/Http/Requests/PasswordRequest.php',
         'App\\Http\\Requests\\ProductEditVerifyRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProductEditVerifyRequest.php',
         'App\\Http\\Requests\\ProductVerifyRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProductVerifyRequest.php',
         'App\\Http\\Requests\\UserLoginVerifyRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UserLoginVerifyRequest.php',

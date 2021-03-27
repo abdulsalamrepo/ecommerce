@@ -141,19 +141,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($sales as $s)
-                                <tr>
-                                    <td class="font-weight-medium">
-                                        {{$s->created_at}}
-                                    </td>
-                                    <td class="font-weight-medium">
-                                        {{$s->order_status}}
-                                    </td>
-                                    <td class="font-weight-medium">
-                                        {{$s->price}}
-                                    </td>
-                                </tr>
-                                @endforeach
+                                @if(!is_null($sales_all))
+                                    @foreach($sales_all as $s)
+                                    <tr>
+                                        <td class="font-weight-medium">
+                                            {{$s->created_at}}
+                                        </td>
+                                        <td class="font-weight-medium">
+                                            {{$s->order_status}}
+                                        </td>
+                                        <td class="font-weight-medium">
+                                            {{$s->price}}
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>

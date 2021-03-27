@@ -48,6 +48,7 @@ class MarketSettingsController extends Controller
             $path = Storage::disk('test')->put('images/setting', $file);
 
         }
+        
         $data=$request->except(['_token','logo']);
         if(isset($path))
         $data['logo']=$path;

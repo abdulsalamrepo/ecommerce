@@ -41,14 +41,11 @@ class signupController extends Controller
             'month' => 'required',
             'gender' => 'required',
             'year' => 'required',
-            'city' => 'required',
-            'zip' => 'required|numeric',
             'tel' => 'required|numeric',
             'pass' => 'required|min:5',
             'confirm_password' => 'required|min:5|same:pass'
             ]);
 
-            //dd($validatedData);
             $u=new User();
             $add=new Address();
 
@@ -62,9 +59,8 @@ class signupController extends Controller
             $u->month=$r->month;
             $u->year=$r->year;
             $u->save();
-            $add->area=$r->address;
-            $add->city=$r->city;
-            $add->zip=$r->zip;
+            $add->address=$r->address;
+            $add->phone_number=$r->tel;
             $add->user_id=$u->id;
             $add->default=true;
             $add->save();

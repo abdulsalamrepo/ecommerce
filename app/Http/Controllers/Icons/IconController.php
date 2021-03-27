@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Icons;
 
 use App\Http\Controllers\Controller;
@@ -34,9 +33,7 @@ class IconController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
+    {}
 
     /**
      * Display the specified resource.
@@ -45,9 +42,7 @@ class IconController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
-    }
+    {}
 
     /**
      * Show the form for editing the specified resource.
@@ -56,9 +51,7 @@ class IconController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
-    }
+    {}
 
     /**
      * Update the specified resource in storage.
@@ -68,9 +61,7 @@ class IconController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
-    }
+    {}
 
     /**
      * Remove the specified resource from storage.
@@ -79,7 +70,5 @@ class IconController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
-    }
+    {}
 }
