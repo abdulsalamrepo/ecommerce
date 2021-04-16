@@ -26,7 +26,7 @@
                     <div class="dash__box dash__box--bg-grey dash__box--shadow-2 u-h-100">
                         <div class="dash__pad-3">
                             <h2 class="dash__h2 u-s-m-b-8">ADDRESS BOOK</h2>
-                            <span class="dash__text-2 u-s-m-b-8">Default Shipping Address</span>
+                            <span class="dash__text-2 u-s-m-b-8">Default Address</span>
                             <div class="dash__link dash__link--secondary u-s-m-b-8">
                                 <a href="{{route('dashboard.user.address')}}">View</a>
 
@@ -58,24 +58,31 @@
                     <tr>
                         <th>Order #</th>
                         <th>Placed On</th>
-                        <th>Items</th>
+                        <th>Shipping Address</th>
+                        <th>Items Count</th>
                         <th>Total</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($lastRecent as $item)
-
                     <tr>
-                        <td>{{md5($item->id)}}</td>
+                        <td>{{$item->order_number}}</td>
                         <td>{{$item->created_at}}</td>
-                        <td>
+                        {{-- <td>
                             <div class="dash__table-img-wrap">
-                                {{-- <img class="u-img-fluid" src="{{asset('uploads/products/'.$item->product->id.'/'.$item->product->image_name)}}" alt=""></div> --}}
                                 <img class="u-img-fluid" src="{{asset($item->product->image_name)}}" alt=""></div>
+                        </td> --}}
+                        <td>
+                            {{ ($item->shopping_country == 'se' ? 'Sweden':'Syrian Arab Republic') . ' '.$item->shipping_state . ' '.$item->shipping_city . ' '.$item->shipping_zipcode . ' '.$item->shipping_address . ' '.$item->shipping_phone}}
                         </td>
                         <td>
                             <div class="dash__table-total">
-                                <span>${{$item->total}}</span>
+                                <span>{{$item->item_count}}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="dash__table-total">
+                                <span>{{$item->grand_total}} SEK</span>
                                 <div class="dash__link dash__link--brand">
                                     <a href="{{route('dashboard.manage.order',$item->id)}}">MANAGE</a></div>
                             </div>

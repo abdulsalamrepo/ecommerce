@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin_panel;
 use App\Product;
 use App\Category;
 use App\CategoryImage;
+use App\ProductCategories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -15,22 +16,33 @@ class categoriesController extends Controller
 {
     public function index()
     {
-        $data['catlist']=Category::all();
+        $data['catlist']=ProductCategories::all();
+        $categories = ProductCategories::with('parentCategory.parentCategory')
+        ->whereHas('childCategories')
+        ->get();
+        $data['categories'] = $categories;
     	return view('admin_panel.categories.index')->with($data);
     }
 
     public function posted( CategoryVerifyRequest $request)
     {
-        $cat = new Category();
+        // $cat = new Category();
+        // $cat->name = $request->Name;
+        // $cat->type = $request->Icon;
+        // $cat->save();
+        $cat = new ProductCategories();
         $cat->name = $request->Name;
-        $cat->parent_category_id = $request->parent_category??0;
+        $cat->icon = $request->Icon;
+        $cat->description = $request->description;
+        $cat->slug = $request->slug;
+        $cat->category_id = $request->category_id;
         $cat->save();
         return redirect()->route('admin.categories');
     }
 
     public function edit($id)
     {
-        $cat = Category::find($id);
+        $cat = ProductCategories::find($id);
         return view('admin_panel.categories.edit')
             ->with('category', $cat);
     }
@@ -38,18 +50,18 @@ class categoriesController extends Controller
     public function update(CategoryEditVerifyRequest $request, $id)
     {
 
-        $catToUpdate = Category::find($request->id);
+        $catToUpdate = ProductCategories::find($request->id);
         $catToUpdate->name = $request->Name;
-        $catToUpdate->type = $request->Type;
+        $catToUpdate->icon = $request->Type;
+        $cat->description = $request->description;
+        $cat->slug = $request->slug;
         $catToUpdate->save();
-
         return redirect()->route('admin.categories');
     }
 
     public function delete($id)
     {
-
-        $cat = Category::find($id);
+        $cat = ProductCategories::find($id);
 
         return view('admin_panel.categories.delete')
             ->with('category', $cat);
@@ -91,7 +103,8 @@ class categoriesController extends Controller
 
 
 
-        $catToDelete = Category::find($request->id);
+        $catToDelete = ProductCategories::find($request->id);
+        $catToDelete->childCategories->update(['category_id'=>'']);
         $catToDelete->delete();
 
 
@@ -100,13 +113,15 @@ class categoriesController extends Controller
     }
     public function getAllCategories()
     {
-        $data = Category::all();
+        $data = ProductCategories::all();
         foreach ($data as $key => $d) {
             $date = new \DateTime();
             $date->setTimestamp(strtotime($d->created_at));
             $data1[$key]['id']=$d->id;
             $data1[$key]['name']=$d->name;
+            $data1[$key]['description']=$d->description;
             $data1[$key]['type']=$d->type;
+            $data1[$key]['slug']=$d->slug;
             $data1[$key]['created_at']=$date->format('Y-m-d');
         }
 

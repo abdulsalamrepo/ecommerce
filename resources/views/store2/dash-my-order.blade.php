@@ -24,7 +24,7 @@
                     <div class="manage-o__header u-s-m-b-30">
                         <div class="dash-l-r">
                             <div>
-                                <div class="manage-o__text-2 u-c-secondary">Order #{{md5($item->id)}}</div>
+                                <div class="manage-o__text-2 u-c-secondary">Order #{{$item->order_number}}</div>
                                 <div class="manage-o__text u-c-silver">Placed on {{$item->created_at}}</div>
                             </div>
                             <div>
@@ -35,27 +35,24 @@
                         </div>
                     </div>
                     <div class="manage-o__description">
+                        @foreach ($item->products as $sales_product)
                         <div class="description__container">
                             <div class="description__img-wrap">
-
-                                <img class="u-img-fluid" src="images/product/electronic/product3.jpg" alt=""></div>
-                            <div class="description-title">{{$item->product->name}}</div>
+                                <img class="u-img-fluid" style="height: inherit;" src="{{asset($sales_product->product->image_name)}}" alt=""></div>
+                            <div class="description-title">{{$sales_product->product->name}}</div>
                         </div>
                         <div class="description__info-wrap">
+                <div><span class="manage-o__badge badge--{{strtolower(str_replace(' ', '-',$item->order_status))}}">{{$item->order_status}}</span></div>
                             <div>
-
-                                <span class="manage-o__badge badge--{{strtolower(str_replace(' ', '-',$item->status))}}">$item->status</span></div>
-                            <div>
-
                                 <span class="manage-o__text-2 u-c-silver">Quantity:
-
-                                    <span class="manage-o__text-2 u-c-secondary">1</span></span></div>
+                                    <span class="manage-o__text-2 u-c-secondary">{{$sales_product->quantity}}</span></span></div>
                             <div>
-
                                 <span class="manage-o__text-2 u-c-silver">Total:
-
-                                    <span class="manage-o__text-2 u-c-secondary">$16.00</span></span></div>
+                                <span class="manage-o__text-2 u-c-secondary">{{$sales_product->price}} SEK</span>
+                                </span>
+                            </div>
                         </div>
+                        @endforeach
                     </div>
                 </div>
             @endforeach

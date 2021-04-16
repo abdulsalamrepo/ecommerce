@@ -57,13 +57,26 @@
                                             <label  for="Description">Product Description*</label>
                                             <textarea type="textarea" class="form-control" id="Description" name="Description"></textarea>
                                         </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label  for="Category">Category*</label>
                                             <select class="form-control form-control-md" id="Category" name="Category">
                                                 @php foreach($catlist->all() as $cat) {
                                                 echo "<option value=".$cat->id." >".$cat->name." </option>"; $select_attribute=''; }
                                                 @endphp
                                             </select>
+                                        </div> --}}
+                                        <div class="form-group">
+                                            <label for="categories">Product Category</label>
+                                            <select class="form-control form-control-md {{ $errors->has('Category') ? 'is-invalid' : '' }}" name="Category" id="categories">
+                                                @foreach($categories as $category)
+                                                    <option value="{{ $category->id }}" {{ in_array($category->id, old('Category', [])) ? 'selected' : '' }}>{{($category->parentCategory->parentCategory->name??false)? ($category->parentCategory->parentCategory->name.'/') :'' }}  {{ ($category->parentCategory->name??false)? ($category->parentCategory->name.'/'):'' }}  {{ $category->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @if($errors->has('Category'))
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('Category') }}
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <label  >Product Price*</label>

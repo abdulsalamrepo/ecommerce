@@ -16,9 +16,9 @@
 
                                         <span class="empty__big-text">EMPTY</span>
 
-                                        <span class="empty__text-1">No items found on your cart.</span>
+                                        <span class="empty__text-1">No products found on your cart.</span>
 
-                                        <a class="empty__redirect-link btn--e-brand" href="shop-side-version-2.html">CONTINUE SHOPPING</a></div>
+                                        <a class="empty__redirect-link btn--e-brand" href="{{route('user.home')}}">Back to home</a></div>
                                 </div>
                             </div>
                         </div>

@@ -2009,7 +2009,7 @@ input::-ms-clear {
   height: 80px;
   width: 100%;
   -ms-flex-pack: justify;
-      justify-content: space-between;
+      /* justify-content: space-between; */
   -ms-flex-align: center;
       align-items: center; }
 
@@ -5953,7 +5953,7 @@ input::-ms-clear {
 .mini-link {
   display: block;
   text-align: center;
-  padding: 12px 42px;
+  padding: 15px;
   border-radius: 6px;
   margin-bottom: 20px;
   font-weight: 700;

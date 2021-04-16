@@ -239,9 +239,10 @@ button.close {
                         <!--====== End - Search Form ======-->
                         <!--====== Dropdown Main plugin ======-->
                         <div class="menu-init" id="navigation">
-                            <button class="btn btn--icon toggle-button toggle-button--white fas fa-cogs" type="button"></button>
+                            <button class="btn btn--icon toggle-button toggle-button--white fas fa-cogs" style="color: #00becc" type="button"></button>
                             <!--====== Menu ======-->
                             <div class="ah-lg-mode">
+                                <span class="ah-close">✕ Close</span>
                                 <!--====== List ======-->
                                 <ul class="ah-list ah-list--design1 ah-list--link-color-white">
                                     <li class="has-dropdown" data-tooltip="tooltip" data-placement="left" title="Account">
@@ -335,7 +336,7 @@ button.close {
                                                         <div class="mini-product">
                                                             <div class="mini-product__image-wrapper">
                                                                 <a class="mini-product__link" href="javascript:;">
-                                                                    <img class="u-img-fluid" src="{{asset('uploads/products/'.$sale->product->id.'/'.$sale->product->image_name)}}" alt=""></a></div>
+                                                                    <img class="u-img-fluid" style="height: 75px" src="{{asset($sale->product->image_name)}}" alt=""></a></div>
                                                             <div class="mini-product__info-wrapper">
                                                                 <span class="mini-product__category">
                                                                     <a href="javascript:;">{{$sale->product->category->name}}</a></span>
@@ -345,7 +346,7 @@ button.close {
 
                                                                 <span class="mini-product__quantity">{{$sale->quantity}} x</span>
 
-                                                                <span class="mini-product__price">$ {{$sale->price}}</span></div>
+                                                                <span class="mini-product__price">SEK {{$sale->price}}</span></div>
                                                         </div>
 
                                                         <a class="mini-product__delete-link far fa-trash-alt" href="{{route('user.deleteCartItem',$sale->product_id)}}"></a>
@@ -367,7 +368,7 @@ button.close {
 
                                                         <span class="subtotal-text">SUBTOTAL</span>
 
-                                                        <span class="subtotal-value">${{$total}}</span></div>
+                                                        <span class="subtotal-value">SEK{{$total}}</span></div>
                                                     <div class="mini-action">
 
                                                         <a class="mini-link btn--e-brand-b-2" href="{{route('user.checkout')}}">PROCEED TO CHECKOUT</a>
@@ -397,7 +398,7 @@ button.close {
                 {{-- <div class="container"> --}}
 
                     <!--====== Secondary Nav ======-->
-                    <div class="secondary-nav" style="width: 100%">
+                    <div class="secondary-nav" style="width: 100%;padding: 10px">
                         <!--====== Dropdown Main plugin ======-->
                         {{-- <div class="menu-init" id="navigation1">
 
@@ -465,16 +466,49 @@ button.close {
 
 
                                         <!--====== Dropdown Main plugin ======-->
-                                        <div class="menu-init" id="navigation2" style="width: 100%;overflow: scroll">
-                                            <button class="btn btn--icon toggle-button toggle-button--white fas fa-cog" type="button"></button>
+                                        <div class="menu-init" id="navigation2" style="margin: 5px;">
+                                            <button style="color: #1ab2be;font-size: 30px;" class="btn btn--icon toggle-button toggle-button--white fa fa-list-alt" type="button"></button>
                                             <!--====== Menu ======-->
                                             <div class="ah-lg-mode" style="padding-left: 10%">
                                                 <span class="ah-close">✕ Close</span>
-
                                                 <!--====== List ======-->
-                                                <ul class="ah-list ah-list--design2 ah-list--link-color-white">
+                                            <ul class="ah-list ah-list--design2 ah-list--link-color-white">
                                             @foreach ($cat as $key => $item)
+
+                                            @if (count($item->childCategories) > 0 && is_null($item->parentCategory))
+                                            <li class="has-dropdown" style="color: black;width: max-content">
+                                                <a href="{{route('user.search.cat',['id'=>$item->id])}}">{{$item->name}}<i class="fas fa-angle-down u-s-m-l-6" style="color: black"></i></a>
+                                                <!--====== Dropdown ======-->
+                                                <span class="js-menu-toggle"></span>
+                                                <ul style="width:170px">
+                                                @foreach ($item->childCategories as $subcatlevel1)
+                                                    @if (count($subcatlevel1->childCategories) > 0)
+                                                        <li class="has-dropdown has-dropdown--ul-left-100" >
+                                                            <a href="{{route('user.search.cat',['id'=>$subcatlevel1->id])}}"><span>
+                                                                {{$subcatlevel1->name}}
+                                                                <i class="fas fa-angle-down u-s-m-l-6" style="color: black"></i>
+                                                            </span>
+                                                            </a>
+                                                            <!--====== Dropdown ======-->
+                                                            <span class="js-menu-toggle" style="right: 15% !important"></span>
+                                                            <ul style="width:170px">
+                                                        @foreach ($subcatlevel1->childCategories as $subcatlevel2)
+                                                                <li ><a href="{{route('user.search.cat',['id'=>$subcatlevel2->id])}}" >{{$subcatlevel2->name}}</a></li>
+                                                        @endforeach
+                                                            </ul>
+                                                        </li>
+                                                    @else
+                                                        <li ><a href="{{route('user.search.cat',['id'=>$subcatlevel1->id])}}" >{{$subcatlevel1->name}}</a></li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                            </li>
+                                            @else
+                                            @if (is_null($item->parentCategory))
                                             <li ><a href="{{route('user.search.cat',['id'=>$item->id])}}" >{{$item->name}}</a></li>
+                                            @endif
+
+                                            @endif
                                             @endforeach
 
                                                     {{-- <li>
@@ -492,9 +526,9 @@ button.close {
 
 
                                         <!--====== Dropdown Main plugin ======-->
-                                        <div class="menu-init" id="navigation3">
+                                        <div class="menu-init" id="navigation3" style="margin: 5px;">
 
-                                            <button class="btn btn--icon toggle-button toggle-button--white fas fa-shopping-bag toggle-button-shop" type="button"></button>
+                                            <button style="color: #1ab2be;font-size: 30px;" class="btn btn--icon toggle-button toggle-button--white fas fa-shopping-bag toggle-button-shop" type="button"></button>
 
                                             {{-- <span class="total-item-round">2</span> --}}
 
@@ -503,6 +537,69 @@ button.close {
                                                 <span class="ah-close">✕ Close</span>
                                                 <!--====== List ======-->
                                                 <ul class="ah-list ah-list--design1 ah-list--link-color-white">
+                                                    <li class="has-dropdown">
+
+                                                        <!--====== Dropdown ======-->
+                                                        {{-- <span class="js-menu-toggle"></span> --}}
+                                                        <div class="mini-cart" style="display: block;">
+                                                            <!--====== Mini Product Container ======-->
+                                                            <div class="mini-product-container gl-scroll u-s-m-b-15">
+                                                                @php
+                                                                    $total = 0;
+                                                                @endphp
+                @if (!is_null($sales))
+                @foreach ($sales as $sale)
+                                                                <!--====== Card for mini cart ======-->
+                                                                <div class="card-mini-product">
+                                                                    <div class="mini-product">
+                                                                        <div class="mini-product__image-wrapper">
+                                                                            <a class="mini-product__link" href="javascript:;">
+                                                                                <img class="u-img-fluid" style="height: 75px" src="{{asset($sale->product->image_name)}}" alt=""></a></div>
+                                                                        <div class="mini-product__info-wrapper">
+                                                                            <span class="mini-product__category">
+                                                                                <a href="javascript:;">{{$sale->product->category->name}}</a></span>
+                                                                            <span class="mini-product__name">
+
+                                                                                <a href="javascript:;">{{$sale->product->name}}</a></span>
+
+                                                                            <span class="mini-product__quantity">{{$sale->quantity}} x</span>
+
+                                                                            <span class="mini-product__price">SEK {{$sale->price}}</span></div>
+                                                                    </div>
+
+                                                                    <a class="mini-product__delete-link far fa-trash-alt" href="{{route('user.deleteCartItem',$sale->product_id)}}"></a>
+                                                                </div>
+                                                                <!--====== End - Card for mini cart ======-->
+                                                                @php
+                                                                    $total += $sale->total;
+                                                                @endphp
+                @endforeach
+                @endif
+                <div style="padding: 10%;margin: 15px" class="mini-product-stat hidden-md-down">
+                    <div class="mini-total">
+
+                        <span class="subtotal-text">SUBTOTAL</span>
+
+                        <span class="subtotal-value">SEK{{$total}}</span>
+                    </div>
+                    <div class="mini-action">
+
+                        <a class="mini-link btn--e-brand-b-2" href="{{route('user.checkout')}}">PROCEED TO CHECKOUT</a>
+
+                        <a class="mini-link btn--e-transparent-secondary-b-2" href="{{route('user.cart')}}">VIEW CART</a></div>
+                </div>
+
+                                                            </div>
+                                                            <!--====== End - Mini Product Container ======-->
+
+
+                                                            <!--====== Mini Product Statistics ======-->
+
+                                                            <!--====== End - Mini Product Statistics ======-->
+                                                        </div>
+                                                        <!--====== End - Dropdown ======-->
+
+                                                    </li>
                                                     {{-- <li>
 
                                                         <a href="{{route('user.home')}}"><i class="fas fa-home u-c-brand"></i></a></li>

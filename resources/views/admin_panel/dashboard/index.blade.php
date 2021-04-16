@@ -67,8 +67,8 @@
             <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">CPU Traffic</span>
-              <span class="info-box-number">90<small>%</small></span>
+              {{-- <span class="info-box-text">CPU Traffic</span>
+              <span class="info-box-number">90<small>%</small></span> --}}
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -80,8 +80,8 @@
             <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Likes</span>
-              <span class="info-box-number">41,410</span>
+              {{-- <span class="info-box-text">Likes</span>
+              <span class="info-box-number">41,410</span> --}}
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -97,8 +97,8 @@
             <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Sales</span>
-              <span class="info-box-number">760</span>
+              {{-- <span class="info-box-text">Sales</span>
+              <span class="info-box-number">760</span> --}}
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -111,8 +111,8 @@
             <span class="info-box-icon bg-yellow"><i class="fa fa-plus"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">New Members</span>
-              <span class="info-box-number">2,000</span>
+              {{-- <span class="info-box-text">New Members</span>
+              <span class="info-box-number">2,000</span> --}}
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -129,15 +129,12 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>
-                                       Time
-                                    </th>
-                                    <th>
-                                        Status
-                                    </th>
-                                    <th>
-                                        Amount
-                                    </th>
+                                    <th>id</th>
+                                    <th>Order Number</th>
+                                    <th>Placed at</th>
+                                    <th>Item Count</th>
+                                    <th>Total Price</th>
+                                    <th>Customer Name</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -145,13 +142,22 @@
                                     @foreach($sales_all as $s)
                                     <tr>
                                         <td class="font-weight-medium">
+                                            {{$s->id}}
+                                        </td>
+                                        <td class="font-weight-medium">
+                                            {{$s->order_number}}
+                                        </td>
+                                        <td class="font-weight-medium">
                                             {{$s->created_at}}
                                         </td>
                                         <td class="font-weight-medium">
-                                            {{$s->order_status}}
+                                            {{$s->item_count}}
                                         </td>
                                         <td class="font-weight-medium">
-                                            {{$s->price}}
+                                            {{$s->grand_total}}
+                                        </td>
+                                        <td class="font-weight-medium">
+                                            {{$s->user->first_name . ' ' .$s->user->last_name}}
                                         </td>
                                     </tr>
                                     @endforeach

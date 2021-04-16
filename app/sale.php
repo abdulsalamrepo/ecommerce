@@ -13,26 +13,35 @@ class sale extends Model
      */
     protected $fillable =
     [
-        'user_id',
-        'product_id',
+        'order_number',
+        'notes',
+        'shipping_phone',
+        'shipping_zipcode',
+        'shipping_state',
+        'shipping_city',
+        'shipping_address',
+        'shipping_fullname',
+        'is_paid',
+        'payment_method',
         'address_id',
+        'user_id',
         'order_status',
-        'price',
-        'quantity'
+        'grand_total',
+        'item_count'
     ];
-
     public function user()
     {
         return $this->belongsTo('App\User','user_id','id');
-    }
-
-    public function product()
-    {
-        return $this->belongsTo('App\Product','product_id','id');
     }
 
     public function address()
     {
         return $this->belongsTo('App\Address','address_id','id');
     }
+
+    public function products()
+    {
+    	return $this->hasMany('App\SalesProduct', 'sale_id', 'id');
+    }
+
 }

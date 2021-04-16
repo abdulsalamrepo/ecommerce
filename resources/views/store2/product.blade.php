@@ -85,9 +85,9 @@
                         <div>
                             <div class="pd-detail__inline">
 
-                                <span class="pd-detail__price">$6.99</span>
+                                <span class="pd-detail__price">SEK6.99</span>
 
-                                <span class="pd-detail__discount">(76% OFF)</span><del class="pd-detail__del">$28.97</del></div>
+                                <span class="pd-detail__discount">(76% OFF)</span><del class="pd-detail__del">SEK28.97</del></div>
                         </div>
                         <div class="u-s-m-b-15">
                             <div class="pd-detail__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
@@ -111,7 +111,7 @@
 
                                 <span class="pd-detail__click-wrap"><i class="far fa-heart u-s-m-r-6"></i>
 
-                                    <a href="signin.html">Add to Wishlist</a>
+                                    <a href="#!">Add to Wishlist</a>
 
                                     <span class="pd-detail__click-count">(222)</span></span></div>
                         </div>
@@ -120,7 +120,7 @@
 
                                 <span class="pd-detail__click-wrap"><i class="far fa-envelope u-s-m-r-6"></i>
 
-                                    <a href="signin.html">Email me When the price drops</a>
+                                    <a href="#!">Email me When the price drops</a>
 
                                     <span class="pd-detail__click-count">(20)</span></span></div>
                         </div>
@@ -670,7 +670,7 @@
                             <div class="product-o product-o--hover-on">
                                 <div class="product-o__wrap">
 
-                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="#!">
 
                                         <img class="aspect__img" src="images/product/electronic/product1.jpg" alt=""></a>
                                     <div class="product-o__action-wrap">
@@ -683,10 +683,10 @@
                                                 <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
                                             <li>
 
-                                                <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
+                                                <a href="#!" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
                                             <li>
 
-                                                <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
+                                                <a href="#!" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -697,20 +697,20 @@
 
                                 <span class="product-o__name">
 
-                                    <a href="product-detail.html">Beats Bomb Wireless Headphone</a></span>
+                                    <a href="#!">Beats Bomb Wireless Headphone</a></span>
                                 <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
 
                                     <span class="product-o__review">(20)</span></div>
 
-                                <span class="product-o__price">$125.00
+                                <span class="product-o__price">SEK125.00
 
-                                    <span class="product-o__discount">$160.00</span></span>
+                                    <span class="product-o__discount">SEK160.00</span></span>
                             </div>
                         </div></div><div class="owl-item active" style="width: 277.5px;"><div class="u-s-m-b-30">
                             <div class="product-o product-o--hover-on">
                                 <div class="product-o__wrap">
 
-                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="#!">
 
                                         <img class="aspect__img" src="images/product/electronic/product2.jpg" alt=""></a>
                                     <div class="product-o__action-wrap">
@@ -723,10 +723,10 @@
                                                 <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
                                             <li>
 
-                                                <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
+                                                <a href="#!" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
                                             <li>
 
-                                                <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
+                                                <a href="#!" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -737,20 +737,20 @@
 
                                 <span class="product-o__name">
 
-                                    <a href="product-detail.html">Red Wireless Headphone</a></span>
+                                    <a href="#!">Red Wireless Headphone</a></span>
                                 <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
 
                                     <span class="product-o__review">(20)</span></div>
 
-                                <span class="product-o__price">$125.00
+                                <span class="product-o__price">SEK125.00
 
-                                    <span class="product-o__discount">$160.00</span></span>
+                                    <span class="product-o__discount">SEK160.00</span></span>
                             </div>
                         </div></div><div class="owl-item active" style="width: 277.5px;"><div class="u-s-m-b-30">
                             <div class="product-o product-o--hover-on">
                                 <div class="product-o__wrap">
 
-                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="#!">
 
                                         <img class="aspect__img" src="images/product/electronic/product3.jpg" alt=""></a>
                                     <div class="product-o__action-wrap">
@@ -763,10 +763,10 @@
                                                 <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
                                             <li>
 
-                                                <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
+                                                <a href="#!" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
                                             <li>
 
-                                                <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
+                                                <a href="#!" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -777,20 +777,20 @@
 
                                 <span class="product-o__name">
 
-                                    <a href="product-detail.html">Yellow Wireless Headphone</a></span>
+                                    <a href="#!">Yellow Wireless Headphone</a></span>
                                 <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
 
                                     <span class="product-o__review">(20)</span></div>
 
-                                <span class="product-o__price">$125.00
+                                <span class="product-o__price">SEK125.00
 
-                                    <span class="product-o__discount">$160.00</span></span>
+                                    <span class="product-o__discount">SEK160.00</span></span>
                             </div>
                         </div></div><div class="owl-item active" style="width: 277.5px;"><div class="u-s-m-b-30">
                             <div class="product-o product-o--hover-on">
                                 <div class="product-o__wrap">
 
-                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="#!">
 
                                         <img class="aspect__img" src="images/product/electronic/product23.jpg" alt=""></a>
                                     <div class="product-o__action-wrap">
@@ -803,10 +803,10 @@
                                                 <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
                                             <li>
 
-                                                <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
+                                                <a href="#!" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
                                             <li>
 
-                                                <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
+                                                <a href="#!" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -817,20 +817,20 @@
 
                                 <span class="product-o__name">
 
-                                    <a href="product-detail.html">Razor Gear Ultra Slim 8GB Ram</a></span>
+                                    <a href="#!">Razor Gear Ultra Slim 8GB Ram</a></span>
                                 <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
 
                                     <span class="product-o__review">(20)</span></div>
 
-                                <span class="product-o__price">$125.00
+                                <span class="product-o__price">SEK125.00
 
-                                    <span class="product-o__discount">$160.00</span></span>
+                                    <span class="product-o__discount">SEK160.00</span></span>
                             </div>
                         </div></div><div class="owl-item" style="width: 277.5px;"><div class="u-s-m-b-30">
                             <div class="product-o product-o--hover-on">
                                 <div class="product-o__wrap">
 
-                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="#!">
 
                                         <img class="aspect__img" src="images/product/electronic/product26.jpg" alt=""></a>
                                     <div class="product-o__action-wrap">
@@ -843,10 +843,10 @@
                                                 <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
                                             <li>
 
-                                                <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
+                                                <a href="#!" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
                                             <li>
 
-                                                <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
+                                                <a href="#!" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -857,20 +857,20 @@
 
                                 <span class="product-o__name">
 
-                                    <a href="product-detail.html">Razor Gear Ultra Slim 12GB Ram</a></span>
+                                    <a href="#!">Razor Gear Ultra Slim 12GB Ram</a></span>
                                 <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
 
                                     <span class="product-o__review">(20)</span></div>
 
-                                <span class="product-o__price">$125.00
+                                <span class="product-o__price">SEK125.00
 
-                                    <span class="product-o__discount">$160.00</span></span>
+                                    <span class="product-o__discount">SEK160.00</span></span>
                             </div>
                         </div></div><div class="owl-item" style="width: 277.5px;"><div class="u-s-m-b-30">
                             <div class="product-o product-o--hover-on">
                                 <div class="product-o__wrap">
 
-                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="#!">
 
                                         <img class="aspect__img" src="images/product/electronic/product30.jpg" alt=""></a>
                                     <div class="product-o__action-wrap">
@@ -883,10 +883,10 @@
                                                 <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
                                             <li>
 
-                                                <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
+                                                <a href="#!" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
                                             <li>
 
-                                                <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
+                                                <a href="#!" data-tooltip="tooltip" data-placement="top" title="" data-original-title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -897,14 +897,14 @@
 
                                 <span class="product-o__name">
 
-                                    <a href="product-detail.html">Razor Gear Ultra Slim 16GB Ram</a></span>
+                                    <a href="#!">Razor Gear Ultra Slim 16GB Ram</a></span>
                                 <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
 
                                     <span class="product-o__review">(20)</span></div>
 
-                                <span class="product-o__price">$125.00
+                                <span class="product-o__price">SEK125.00
 
-                                    <span class="product-o__discount">$160.00</span></span>
+                                    <span class="product-o__discount">SEK160.00</span></span>
                             </div>
                         </div></div></div></div><div class="owl-nav"><div class="p-prev"><i class="fas fa-long-arrow-alt-left"></i></div><div class="p-next"><i class="fas fa-long-arrow-alt-right"></i></div></div><div class="owl-dots disabled"></div></div>
                 </div>

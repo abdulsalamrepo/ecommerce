@@ -16,18 +16,11 @@ class UserDashboardController extends Controller
     public function index()
     {
 
-        $lastRecent=sale::selectRaw('id,product_id,created_at,max(price) as price , sum(quantity) as quantity')
-            ->where('user_id',session()->get('user')->id)
-            ->groupBy('created_at')
-            ->groupBy('product_id')
-            ->groupBy('id')
-            ->orderBy('id','desc')
+        $lastRecent=sale::where('user_id',session()->get('user')->id)
+            ->orderBy('created_at','desc')
             ->limit(4)
             ->get();
-            foreach ($lastRecent as $key => $sale) {
-                $sale->product;
-                $sale['total']=$sale->price*$sale->quantity;
-            }
+
             $address=Address::where('default',1)->first();
         return view('store2.dashboard',compact('lastRecent','address'));
     }
@@ -38,18 +31,11 @@ class UserDashboardController extends Controller
     }
     public function myOrders()
     {
-        $lastRecent=sale::selectRaw('id,product_id,created_at,max(price) as price , sum(quantity) as quantity')
-        ->where('user_id',session()->get('user')->id)
-        ->groupBy('created_at')
-        ->groupBy('product_id')
-        ->groupBy('id')
-        ->orderBy('id','desc')
-        ->limit(5)
-        ->get();
-        foreach ($lastRecent as $key => $sale) {
-            $sale->product;
-            $sale['total']=$sale->price*$sale->quantity;
-        }
+        $lastRecent=sale::where('user_id',session()->get('user')->id)
+            ->orderBy('created_at','desc')
+            ->limit(5)
+            ->get();
+
         return view('store2.dash-my-order',compact('lastRecent'));
     }
 

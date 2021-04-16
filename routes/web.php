@@ -1,8 +1,10 @@
 <?php
 
-use App\sale;
 use App\Category;
 use App\MarketSetting;
+use App\SalesProductTemp;
+use App\ProductCategories;
+use App\Http\Controllers\SwishPaymentController;
 
 
 /*
@@ -23,38 +25,44 @@ View::composer('*', function ($view) {
         $iconsjson = file_get_contents('fa.json');
         $iconsf= json_decode($iconsjson,true) ;
         $ms=MarketSetting::find(1);
-        $cat=Category::all();
+        $cat = ProductCategories::with('childCategories.childCategories')->with('parentCategory')->get();
+
         foreach ($cat as $key => $c) {
             $c->images;
         }
+        $shipping =0;
         if(Session::has('user'))
         {
-            $sales=sale::selectRaw('product_id,max(price) as price , sum(quantity) as quantity')
+            $weight = 0;
+            $sales=SalesProductTemp::selectRaw('product_id,max(price) as price , sum(quantity) as quantity')
             ->where('user_id',session()->get('user')->id)
             ->groupBy('product_id')
             ->get();
+
             foreach ($sales as $key => $sale) {
                 $sale->product;
                 $sale->product->category;
                 $sale['total']=$sale->price*$sale->quantity;
+                $weight += $sale->product->weight*$sale->quantity;
             }
             $user=session()->get('user');
+            $shipping=($weight*$ms->shipping)/100;
         }
         else
         {
             $sales=null;
             $user=null;
         }
-        $view->with(compact('icons','iconsf','ms','cat','sales','user'));
+        $view->with(compact('icons','iconsf','ms','cat','sales','user','shipping'));
 
 });
 
-Route::get('hik', function () {
-    return view('store2.address.dash-address-book');
+Route::get('hik/{number}', function ($number) {
+    return SwishPaymentController::TestNumber($number);
     // Cookie::queue('user', $admin, 365*24*60);
     // return Cookie::get('user');
     return response()->json($request->cookie('acceptCookies'), 200);
-});
+})->name('hik');
 
 //login
 Route::get('admin', 'loginController@adminIndex')->name('admin.login');
@@ -80,35 +88,31 @@ Route::group(['middleware' => 'admin'], function(){
     //Dashboard
     Route::get("/admin_panel", 'admin_panel\dashboardController@index')->name('admin.dashboard');
     Route::get('admin/logout', 'loginController@adminLogout')->name('admin.logout');
+
     //categories
     Route::get('/admin_panel/categories', 'admin_panel\categoriesController@index')->name('admin.categories');
     Route::post('/admin_panel/categories', 'admin_panel\categoriesController@posted');
-
     Route::get('/admin_panel/categories/edit/{id}', 'admin_panel\categoriesController@edit')->name('admin.categories.edit');
     Route::post('/admin_panel/categories/edit/{id}', 'admin_panel\categoriesController@update');
-
     Route::get('/admin_panel/categories/delete/{id}', 'admin_panel\categoriesController@delete')->name('admin.categories.delete');
     Route::post('/admin_panel/categories/delete/{id}', 'admin_panel\categoriesController@destroy');
     Route::post('/admin_panel/categories/add/image', 'admin_panel\categoriesController@addImage')->name('admin.categories.add.image');
     Route::get('/admin_panel/get_all_categories', 'admin_panel\categoriesController@getAllCategories');
 
-    //products
+    // products
     Route::get('/admin_panel/products', 'admin_panel\productsController@index')->name('admin.products');
     Route::get('/admin_panel/get_all_products', 'admin_panel\productsController@getAllProducts');
-
     Route::get('/admin_panel/products/create', 'admin_panel\productsController@create')->name('admin.products.create');
     Route::post('/admin_panel/products/create', 'admin_panel\productsController@store');
-
     Route::get('/admin_panel/products/edit/{id}', 'admin_panel\productsController@edit')->name('admin.products.edit');
     Route::post('/admin_panel/products/edit/{id}', 'admin_panel\productsController@update');
-
     Route::get('/admin_panel/products/delete/{id}', 'admin_panel\productsController@delete')->name('admin.products.delete');
     Route::post('/admin_panel/products/delete/{id}', 'admin_panel\productsController@destroy');
 
-    //order management
+    // order management
     Route::get('/admin_panel/management', 'admin_panel\managementController@manage')->name('admin.orderManagement');
     Route::post('/admin_panel/management', 'admin_panel\managementController@update')->name('admin.orderUpdate');
-    //Exclusive Product
+    // Exclusive Product
     Route::get('/admin_panel/exclusive_product', 'admin_panel\ExclusiveProductController@index')->name('admin.exclusive.product');
     //Icons
     Route::get('/admin_panel/icons', 'Icons\IconController@index')->name('admin.icons');
@@ -150,11 +154,12 @@ Route::post('/view/{id}', 'user\userController@post');
 Route::get('/cart', 'user\userController@cart')->name('user.cart');
 Route::post('/cart', 'user\userController@confirm');
 Route::post('/add-cart', 'user\userController@addToCart')->name('user.addToCart');
-Route::post('/checkout-cart', 'user\userController@addToCart')->name('user.checkout');
+Route::post('/checkout-cart', 'user\userController@proceedCart')->name('user.proceed.checkout');
 
 Route::post('/edit_cart', 'user\userController@editCart')->name('user.editCart');
 Route::get('/delete_item_from_cart/{id}', 'user\userController@deleteCartItem')->name('user.deleteCartItem');
-Route::get('/checkout', 'user\userController@viewCheckout')->name('user.checkout');
+Route::get('/delete_items_from_cart', 'user\userController@deleteCartItems')->name('user.deleteCart');
+Route::get('/checkout', 'user\userController@viewCheckout')->name('user.checkout')->middleware('user');
 
 
 Route::get('/logout', 'loginController@userLogout')->name('user.logout');

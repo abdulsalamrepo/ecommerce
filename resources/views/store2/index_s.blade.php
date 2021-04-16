@@ -5,7 +5,8 @@
             <div class="fixed-list">
                 <ul class="nav" style="height: 250px; overflow: auto;" id="init-scrollspy">
                     @foreach ($categories as $item)
-                    <li><a class="nav-link" title="{{$item->name}}" href="#category{{$item->id}}" data-click-scroll="#category{{$item->id}}"><i class="category{{$item->type}}"></i></a></li>
+                    <li><a class="nav-link" title="{{$item->name}}" href="#category{{$item->id}}" data-click-scroll="#category{{$item->id}}"><i class="category {{$item->type}}"></i></a></li>
+                    {{-- {{($category->parentCategory->parentCategory->name??false)? ($category->parentCategory->parentCategory->name.'/') :'' }}  {{ ($category->parentCategory->name??false)? ($category->parentCategory->name.'/'):'' }}  {{ $category->name }} --}}
                     @endforeach
                 </ul>
             </div>
@@ -182,7 +183,7 @@
                                                 <div class="u-s-m-b-30">
                                                     <div class="product-o product-o--hover-on">
                                                         <div class="product-o__wrap">
-                                                            <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                                            <a class="aspect aspect--bg-grey aspect--square u-d-block" href="#!">
 {{-- <img class="aspect__img" src="{{asset('uploads/products/'.$i->id.'/'.$i->image_name)}}" alt=""></a> --}}
 <img class="aspect__img" src="{{asset($i->image_name)}}" alt=""></a>
                                                         @if (Session::has('user'))
@@ -208,8 +209,8 @@
                                                             <i class="fas fa-star"></i>
                                                             <span class="product-o__review">(23)</span>
                                                         </div>
-                                                            <span class="product-o__price">{{$i->price}}
-                                                            <span class="product-o__discount">{{$i->discount}}</span>
+                                                            <span class="product-o__price">{{$i->price}} SEK
+                                                            <span class="product-o__discount">{{$i->discount}}SEK</span>
                                                             </span>
                                                     </div>
                                                 </div>
@@ -289,7 +290,7 @@
                                                 <div class="col-lg-8 col-md-8 col-sm-8">
                                                     <div class="x-product__img-wrap">
 
-                                                        <a class="u-d-block" href="product-detail.html">
+                                                        <a class="u-d-block" href="#!">
 
                                                             <img class="u-d-block u-img-fluid" src="" alt=""></a></div>
                                                 </div>
@@ -331,7 +332,7 @@
                                                 <div class="col-lg-8 col-md-8 col-sm-8">
                                                     <div class="x-product__img-wrap">
 
-                                                        <a class="u-d-block" href="product-detail.html">
+                                                        <a class="u-d-block" href="#!">
 
                                                             <img class="u-d-block u-img-fluid" src="" alt=""></a></div>
                                                 </div>
@@ -361,7 +362,7 @@
 
                                                 <span class="service__info-text-1">Free Shipping</span>
 
-                                                <span class="service__info-text-2">Free shipping on all US order or order above $200</span></div>
+                                                <span class="service__info-text-2">Free shipping on all US order or order above SEK200</span></div>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-6 u-s-m-b-30">
@@ -473,7 +474,7 @@
 
                                                     <span class="pd-detail__price">{{$i->discount}}</span>
 
-                                                    <span class="pd-detail__discount">({{(($i->price - $i->discount)*100)/$i->price}}% OFF)</span><del class="pd-detail__del">${{$i->price}}</del></div>
+                                                    <span class="pd-detail__discount">({{(($i->price - $i->discount)*100)/$i->price}}% OFF)</span><del class="pd-detail__del">SEK{{$i->price}}</del></div>
                                             </div>
                                             <div class="u-s-m-b-15">
                                                 <div class="pd-detail__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
@@ -495,7 +496,7 @@
 
                                                     <span class="pd-detail__click-wrap"><i class="far fa-heart u-s-m-r-6"></i>
 
-                                                        <a href="signin.html">Add to Wishlist</a>
+                                                        <a href="#!">Add to Wishlist</a>
 
                                                         <span class="pd-detail__click-count">(222)</span></span></div>
                                             </div> --}}
@@ -504,7 +505,7 @@
 
                                                     <span class="pd-detail__click-wrap"><i class="far fa-envelope u-s-m-r-6"></i>
 
-                                                        <a href="signin.html">Email me When the price drops</a>
+                                                        <a href="#!">Email me When the price drops</a>
 
                                                         <span class="pd-detail__click-count">(20)</span></span></div>
                                             </div> --}}
@@ -590,7 +591,7 @@
 
                                         <span class="success__quantity">Quantity: 1</span>
 
-                                        <span class="success__price">${{$i->discount}}</span></div>
+                                        <span class="success__price">SEK{{$i->discount}}</span></div>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-12">

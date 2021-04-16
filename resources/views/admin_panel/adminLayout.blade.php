@@ -149,7 +149,7 @@ a#uploadPhotoBtn
                         </div>
                 </a>
                 <a class="navbar-brand brand-logo-mini" href="{{route('admin.dashboard')}}">
-                    <div style="color: #007bff;">{{$ms->name}}</div>
+                    <div style="color: #007bff;">MAT</div>
                 </a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center">
@@ -275,7 +275,7 @@ a#uploadPhotoBtn
 
     <!-- Plugin js for this page-->
     <!-- End plugin js for this page-->
-    
+
     <!-- inject:js -->
     <script src="{{asset('js/off-canvas.js')}}"></script>
     <script src="{{asset('js/misc.js')}}"></script>

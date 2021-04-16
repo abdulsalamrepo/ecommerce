@@ -34,12 +34,25 @@
                                             <label for="exampleInputPassword1">Product Description</label>
                                             <textarea type="textarea" class="form-control" name="Description">{{$product->description}}</textarea>
                                         </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label for="exampleFormControlSelect1">Large select</label>
                                             <select class="form-control form-control-md" id="exampleFormControlSelect1" name="Category">
                                                 @php foreach($catlist->all() as $cat) { if($product->category->id==$cat->id) { $select_attribute='selected'; } echo "
                                                 <option value=".$cat->id." " .$select_attribute.">".$cat->name." </option>"; $select_attribute=''; } @endphp
                                             </select>
+                                        </div> --}}
+                                        <div class="form-group">
+                                            <label for="categories">Product Category</label>
+                                            <select class="form-control form-control-md {{ $errors->has('Category') ? 'is-invalid' : '' }}" name="Category" id="categories">
+                                                @foreach($categories as $category)
+                                                    <option value="{{ $category->id }}" {{ in_array($category->id, old('Category', [])) ? 'selected' : '' }}>{{($category->parentCategory->parentCategory->name??false)? ($category->parentCategory->parentCategory->name.'/') :'' }}  {{ ($category->parentCategory->name??false)? ($category->parentCategory->name.'/'):'' }}  {{ $category->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @if($errors->has('Category'))
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('Category') }}
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <label >Product Price</label>

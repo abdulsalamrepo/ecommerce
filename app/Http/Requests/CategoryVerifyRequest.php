@@ -24,7 +24,10 @@ class CategoryVerifyRequest extends FormRequest
     public function rules()
     {
         return [
-            'Name' => 'required|unique:categories|max:50',
+            'Name' => 'required|unique:product_categories|max:50',
+            'Icon' => 'required',
+            'description' => 'required',
+            'slug' => 'required|unique:product_categories|max:50',
         ];
     }
 }

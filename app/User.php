@@ -26,6 +26,6 @@ class User extends Model
 
     public function addresses()
     {
-    	return $this->hasMany('App\Address', 'id', 'address_id');
+    	return $this->hasMany('App\Address', 'user_id', 'id');
     }
 }

@@ -17,16 +17,46 @@
                     <h4 class="card-title">Add Category</h4>
                     <form class="forms-sample" method="post" id="cat_form">
                         {{csrf_field()}}
+                        <div class="form-group">
+                            <label for="category_id">Parent Category</label>
+                            <select class="form-control select2 {{ $errors->has('category') ? 'is-invalid' : '' }}" name="category_id" id="category_id">
+                                <option value="">Please select</option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                    @foreach($category->childCategories as $childCategory)
+                                        <option value="{{ $childCategory->id }}" {{ old('category_id') == $childCategory->id ? 'selected' : '' }}>-- {{ $childCategory->name }}</option>
+                                    @endforeach
+                                @endforeach
+                            </select>
+                            @if($errors->has('category'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('category') }}
+                                </div>
+                            @endif
+                            {{-- <span class="help-block">{{ trans('cruds.productCategory.fields.category_helper') }}</span> --}}
+                        </div>
                         <div class="form-group row">
-                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Name</label>
+                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Name*</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" name="Name" id="Name" placeholder="Enter Category Name">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Icon</label>
+                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Icon*</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" name="Icon"  placeholder="Enter Icon of Category">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Description*</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" name="description" id="description" placeholder="Enter Description"> </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Slug*</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="slug"  placeholder="Enter Slug">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-success mr-2">Add</button>

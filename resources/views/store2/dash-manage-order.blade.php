@@ -11,7 +11,7 @@
                 </div>
                 <div>
                     <div class="manage-o__text-2 u-c-silver">Total:
-                    <span class="manage-o__text-2 u-c-secondary">${{$order->price*$order->quantity}}</span></div>
+                    <span class="manage-o__text-2 u-c-secondary">SEK{{$order->price*$order->quantity}}</span></div>
                 </div>
             </div>
         </div>
@@ -81,7 +81,7 @@
                         </div>
                         <div>
                             <span class="manage-o__text-2 u-c-silver">Total:
-                                <span class="manage-o__text-2 u-c-secondary">${{$order->price*$order->quantity}}</span>
+                                <span class="manage-o__text-2 u-c-secondary">SEK{{$order->price*$order->quantity}}</span>
                             </span>
                         </div>
                     </div>
@@ -115,19 +115,19 @@
                     <h2 class="dash__h2 u-s-m-b-8">Total Summary</h2>
                     <div class="dash-l-r u-s-m-b-8">
                         <div class="manage-o__text-2 u-c-secondary">Subtotal</div>
-                        <div class="manage-o__text-2 u-c-secondary">${{$order->price*$order->quantity}}</div>
+                        <div class="manage-o__text-2 u-c-secondary">SEK{{$order->price*$order->quantity}}</div>
                     </div>
                     <div class="dash-l-r u-s-m-b-8">
                         <div class="manage-o__text-2 u-c-secondary">Fees</div>
-                        <div class="manage-o__text-2 u-c-secondary">$16.00</div>
+                        <div class="manage-o__text-2 u-c-secondary">SEK16.00</div>
                     </div>
                     <div class="dash-l-r u-s-m-b-8">
                         <div class="manage-o__text-2 u-c-secondary">Shipping</div>
-                        <div class="manage-o__text-2 u-c-secondary">$16.00</div>
+                        <div class="manage-o__text-2 u-c-secondary">SEK16.00</div>
                     </div>
                     <div class="dash-l-r u-s-m-b-8">
                         <div class="manage-o__text-2 u-c-secondary">Total</div>
-                        <div class="manage-o__text-2 u-c-secondary">$30.00</div>
+                        <div class="manage-o__text-2 u-c-secondary">SEK30.00</div>
                     </div>
                     <span class="dash__text-2">Paid by Cash on Delivery</span>
                 </div>

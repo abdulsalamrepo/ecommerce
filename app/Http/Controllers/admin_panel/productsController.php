@@ -4,9 +4,10 @@ namespace App\Http\Controllers\admin_panel;
 
 use App\Product;
 use App\Category;
+use App\ProductCategories;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -20,13 +21,16 @@ class productsController extends Controller
    public function index()
     {
         $result = Product::all();
+
     	return view('admin_panel.products.index')->with('prdlist', $result);
     }
 
      public function create()
     {
-        $result = Category::all();
-        return view('admin_panel.products.create')->with('catlist', $result);
+        // $result = Category::all();
+        $categories = ProductCategories::with('parentCategory.parentCategory')
+        ->get();
+        return view('admin_panel.products.create')->with('categories', $categories);
     }
 
     public function store(ProductVerifyRequest $request)
@@ -89,11 +93,12 @@ class productsController extends Controller
 
     public function edit($id)
     {
-        $cat = Category::all();
+        // $cat = Category::all();
+        $cat = ProductCategories::all();
         $prd = Product::find($id);
         return view('admin_panel.products.edit')
             ->with('product', $prd)
-            ->with('catlist', $cat)
+            ->with('categories', $cat)
             ->with('select_attribute', '');
     }
 
